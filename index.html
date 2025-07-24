@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="supa.js" defer></script>
+  </head>
+  <body>
+    <div id="logo">
+      <img src="gold.png" alt="" />
+      <h1>Umma Gold</h1>
+    </div>
+    <div id="form-container">
+      <form action="#">
+        <div id="d-n">
+          <span>Dokan name : </span>
+          <select id="d-n-o"></select>
+          <button>
+            <a href="addDokan.html"> Add new Shop</a>
+          </button>
+        </div>
+        <div class="container">
+          <span>Amount : </span>
+          <input id="amt" type="number" />
+          <h5 id="a-e" hidden>please enter amount</h5>
+          <span>status : </span>
+
+          <select id="status">
+            <option value="given">given</option>
+            <option value="received">received</option>
+          </select>
+        </div>
+        <div id="for">
+          <span>Formula</span>
+
+          <select id="formula">
+            <option value="92.75" selected>92.75</option>
+            <option value="92.90">92.90</option>
+            <option value="93.10">93.10</option>
+            <option value="93.25">93.25</option>
+            <option value="93.75">94.75</option>
+            <option value="94.25">94.25</option>
+            <option value="95">95</option>
+          </select>
+          <input id="manual" type="number" hidden value="0" />
+          <h5 id="f-e" hidden>Please select or enter a formula</h5>
+        </div>
+        <div class="container">
+          <span>Due : </span><span id="due">0</span>gm
+        </div>
+        <br />
+        <button id="submit-form" type="submit">submit</button>
+      </form>
+    </div>
+  </body>
+</html>

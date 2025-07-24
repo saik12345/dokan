@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=A, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="supa.js" defer></script>
+  </head>
+  <body>
+    <div id="logo">
+      <h1>Add dokan</h1>
+    </div>
+    <div id="submit-form">
+      <form id="dokan-add" action="#">
+        <div class="container">
+          <span>Enter Dokan Name : </span>
+          <input style="width: fit-content" type="text" id="new-dokan-name" />
+        </div>
+
+        <div class="container">
+          <span>Mobile number : </span>
+          <input
+            id="mob"
+            style="width: fit-content"
+            type="text"
+            maxlength="10"
+            minlength="10"
+          />
+        </div>
+
+        <div class="container">
+          <span>email : </span>
+          <input id="eml" style="width: fit-content" type="text" />
+        </div>
+
+        <div class="container">
+          <span>Address : </span>
+          <input id="adr" style="width: fit-content" type="text" />
+        </div>
+        <button id="add-dokan-button" type="submit">Submit</button>
+        <button id="back"><a href="index.html">back</a></button>
+      </form>
+    </div>
+  </body>
+</html>
