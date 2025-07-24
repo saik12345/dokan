@@ -52,14 +52,13 @@ async function addDokan(e) {
 //calculate-due
 function calculateDue() {
   let dueamt;
-  if (status.value == "given"){
-
+  if (status.value == "given") {
     dueamt = (amt.value * formula.value) / 99.5 - (92 * amt.value) / 99.5;
     due.textContent = dueamt.toFixed(2);
   }
-  else{
-    dueamt=
-  }
+  // else{
+  //   dueamt=()
+  // }
 }
 
 //index page
