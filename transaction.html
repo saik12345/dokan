@@ -9,24 +9,25 @@
     <style>
       .span-menu {
         color: white;
-        background-color: blueviolet;
+        /* background-color: blueviolet; */
         /* margin: 5px 10px; */
-        border-radius: 10px;
-        border-bottom: 2px solid black;
+        /* border-radius: 10px; */
+        border-right: 2px solid black;
         padding: 0.8rem;
         display: inline-block;
-        width: 15%;
+        width: 18%;
       }
       .span-menu2 {
         color: white;
         /* background-color: blueviolet; */
-        /* margin: 5px 10px; */
+        /* margin: 0 px 5px; */
         border-radius: 10px;
-        /* border-bottom: 2px solid black; */
+        border: 2px solid black;
         padding: 0.8rem;
         display: inline-block;
         width: 15%;
-        font-size: 1 rem;
+        /* font-size: 1 rem; */
+        text-align: center;
         /* overflow: auto; */
       }
     </style>
@@ -86,7 +87,14 @@
     </div>
 
     <div id="transactionArea" style="overflow-x: auto; padding: 0; margin: 0">
-      <div style="display: flex; gap: 1rem; padding-right: 1rem; margin: 0">
+      <div
+        style="
+          display: flex;
+          padding: 0;
+          margin: 0;
+          background-color: blueviolet;
+        "
+      >
         <span class="span-menu">Date</span>
         <span class="span-menu">Dokan</span>
         <span class="span-menu">Amount</span>

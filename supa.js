@@ -102,12 +102,16 @@ async function getTransactions() {
   transactions?.map((t) => {
     // display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0"
     const row = document.createElement("div");
+    row.className = "";
     row.style.display = "flex";
     row.style.gap = "1rem";
+    row.style.margin = 0;
+    row.style.paddingRight = "1rem";
+    row.style.backgroundColor = "black";
     row.innerHTML = `<span class="span-menu2">${t.date}</span>
     <span class="span-menu2">${t.shop_name}</span><span class="span-menu2">${t.Amount}</span>
     <span class="span-menu2">${t.due}</span><span class="span-menu2">${t.status}</span>
-    <button>❌</button>`;
+    <button id="${t.id}" style="background-color:black;padding:0rem 0.4rem;font-size:0.8rem;">❌</button>`;
     transactionArea.append(row);
   });
 }
