@@ -27,8 +27,8 @@ getAllDokans();
 
 //add-dokans
 async function addDokan(e) {
-  // e.preventDefault();
-
+  e.preventDefault();
+  console.log("addDokan triggered");
   console.log(addDokanForm);
   const dokanName = document.getElementById("new-dokan-name").value;
   if (!dokanName) {
@@ -48,7 +48,7 @@ async function addDokan(e) {
     console.log(data);
   }
 
-  // addDokanForm.reset();
+  addDokanForm.reset();
 }
 
 //calculate-due
