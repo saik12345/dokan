@@ -166,7 +166,7 @@ if (window.location.href.includes("index")) {
 if (window.location.href.includes("transaction")) {
   getTransactions();
 }
-if (window.location.href.includes("Dokans")) {
+if (window.location.href.includes("dokans")) {
   getAllDokans();
 }
 
