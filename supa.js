@@ -27,7 +27,7 @@ getAllDokans();
 
 //add-dokans
 async function addDokan(e) {
-  e.preventDefault();
+  // e.preventDefault();
 
   console.log(addDokanForm);
   const dokanName = document.getElementById("new-dokan-name").value;
@@ -47,6 +47,8 @@ async function addDokan(e) {
   } else {
     console.log(data);
   }
+
+  // addDokanForm.reset();
 }
 
 //calculate-due
@@ -55,15 +57,15 @@ function calculateDue() {
   if (status.value == "given") {
     dueamt = (amt.value * formula.value) / 99.5 - (92 * amt.value) / 99.5;
     due.textContent = dueamt.toFixed(2);
+  } else {
+    dueamt = Number(amt.value);
+    due.textContent = dueamt.toFixed(2);
   }
-  // else{
-  //   dueamt=()
-  // }
 }
 
 //index page
 const status = document.getElementById("status");
-const manualInput = document.getElementById("manual");
+// const manualInput = document.getElementById("manual");
 const formula = document.getElementById("formula");
 const dno = document.getElementById("d-n-o");
 const due = document.getElementById("due");
@@ -72,11 +74,9 @@ const amt = document.getElementById("amt");
 //event listeners
 status?.addEventListener("change", function () {
   if (this.value == "received") {
-    manualInput.removeAttribute("hidden");
-    formula.setAttribute("hidden", true);
+    formula.setAttribute("disabled", true);
   } else {
-    manualInput.setAttribute("hidden", true);
-    formula.removeAttribute("hidden");
+    formula.removeAttribute("disabled");
   }
 });
 amt?.addEventListener("input", calculateDue);
