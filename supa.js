@@ -99,7 +99,7 @@ async function getTransactions() {
     .select("id,shop_name,date,due,Amount,status");
   console.log(transactions);
 
-  transactions.map((t) => {
+  transactions?.map((t) => {
     // display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0"
     const row = document.createElement("div");
     row.style.display = "flex";
