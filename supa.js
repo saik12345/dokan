@@ -91,15 +91,33 @@ async function goldFormData(e) {
   goldForm.reset();
 }
 
+//get-transactions
+
+async function getTransactions() {
+  let { data: transactions, error } = await supabase
+    .from("gold")
+    .select("id,shop_name,date,due,Amount,status");
+  console.log(transactions);
+
+  transactions.map(transaction=>{
+    const row=document.createElement('div');
+    row.innerHTML=`<span>${item.shop_name}</span>`
+  })
+}
+
 //index page
 const status = document.getElementById("status");
 const formula = document.getElementById("formula");
 const dno = document.getElementById("d-n-o");
+
 const due = document.getElementById("due");
 const amt = document.getElementById("amt");
 const goldForm = document.getElementById("gold-form");
 
 //event listeners
+dno.addEventListener("change", () => {
+  console.log(dno.value);
+});
 status?.addEventListener("change", function () {
   if (this.value == "received") {
     formula.setAttribute("disabled", true);
@@ -121,3 +139,8 @@ const eml = document.getElementById("eml");
 const adr = document.getElementById("adr");
 const addDokanButton = document.getElementById("add-dokan-button");
 addDokanForm?.addEventListener("submit", addDokan);
+
+//for transactions
+
+const transactionArea = document.getElementById("transactionArea");
+getTransactions();

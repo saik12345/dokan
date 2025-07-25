@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="supa.js" defer></script>
+    <style>
+      .span-menu {
+        color: white;
+        background-color: blueviolet;
+        /* margin: 5px 10px; */
+        border-radius: 10px;
+        padding: 0.8rem;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="logo"><h1>Transactions</h1></div>
+    <div>
+      <span class="span-menu"
+        >Dokan name :
+        <select name="dokans" id="d-n-o" required>
+          <option value="None" selected>Select a dokan</option>
+        </select>
+      </span>
+      <span
+        style="
+          color: white;
+          background-color: blueviolet;
+          margin: 5px 10px;
+          border-radius: 10px;
+          display: inline-block;
+        "
+        ><label for="from-date">From:</label
+        ><input type="date" style="width: fit-content" id="from-date" />
+      </span>
+      <span
+        style="
+          color: white;
+          background-color: blueviolet;
+          margin: 5px 10px;
+          border-radius: 10px;
+          display: inline-block;
+        "
+        ><label for="to-date">To:</label
+        ><input type="date" style="width: fit-content" />
+      </span>
+      <span
+        style="
+          color: white;
+          background-color: blueviolet;
+          margin: 5px 10px;
+          border-radius: 10px;
+          display: inline-block;
+        "
+        >Status :
+        <select id="status-data">
+          <option value="given">given</option>
+          <option value="received">received</option>
+        </select>
+      </span>
+    </div>
+
+    <div id="transactionArea" style="overflow-x: auto; padding: 0; margin: 0">
+      <div style="display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0">
+        <span class="span-menu">Date</span>
+        <span class="span-menu">Dokan</span>
+        <span class="span-menu">Amount</span>
+        <span class="span-menu">Due</span>
+        <span class="span-menu">Status</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -6,6 +6,8 @@
 }
 body {
   background-color: #575a60;
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -95,4 +97,5 @@ select {
   /* border-radius: 1.2rem; */
   text-align: center;
   padding: 1.5rem;
+  padding: 0.8rem;
 }
