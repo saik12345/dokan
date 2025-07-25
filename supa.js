@@ -55,7 +55,7 @@ async function addDokan(e) {
 function calculateDue() {
   let dueamt;
   if (status.value == "given") {
-    dueamt = (amt.value * formula.value) / 99.5;
+    dueamt = Number((amt.value * formula.value) / 99.5);
     due.textContent = dueamt.toFixed(2);
   } else {
     dueamt = Number(amt.value);
