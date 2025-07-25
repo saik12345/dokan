@@ -99,10 +99,17 @@ async function getTransactions() {
     .select("id,shop_name,date,due,Amount,status");
   console.log(transactions);
 
-  transactions.map(transaction=>{
-    const row=document.createElement('div');
-    row.innerHTML=`<span>${item.shop_name}</span>`
-  })
+  transactions.map((t) => {
+    // display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0"
+    const row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.gap = "1rem";
+    row.innerHTML = `<span class="span-menu2">${t.date}</span>
+    <span class="span-menu2">${t.shop_name}</span><span class="span-menu2">${t.Amount}</span>
+    <span class="span-menu2">${t.due}</span><span class="span-menu2">${t.status}</span>
+    <button>❌</button>`;
+    transactionArea.append(row);
+  });
 }
 
 //index page

@@ -14,27 +14,32 @@
     </div>
 
     <div style="display: flex">
-      <div
-        style="
-          background-color: blueviolet;
-          border-radius: 5px;
-          border-bottom: solid black;
-          border-right: solid black;
-        "
+      <a href="transaction.html">
+        <div
+          style="
+            background-color: blueviolet;
+            border-radius: 5px;
+            border-bottom: solid black;
+            border-right: solid black;
+          "
+        >
+          Show Transactions
+        </div></a
       >
-        <a href="transaction.html">Show Transactions</a>
-      </div>
-      <div
-        style="
-          background-color: blueviolet;
-          border-radius: 5px;
-          border-bottom: solid black;
-          border-right: solid black;
-          margin-left: 1.2rem;
-        "
+
+      <a href="Dokans.html"
+        ><div
+          style="
+            background-color: blueviolet;
+            border-radius: 5px;
+            border-bottom: solid black;
+            border-right: solid black;
+            margin-left: 1.2rem;
+          "
+        >
+          Show Dokans
+        </div></a
       >
-        <a href="Dokans.html">Show Dokans</a>
-      </div>
     </div>
 
     <div id="form-container">
@@ -58,9 +63,9 @@
         </div>
         <div class="container">
           <span>Amount : </span>
-          <input id="amt" type="number" />
+          <input id="amt" type="number" /> gm
           <h5 id="a-e" hidden>please enter amount</h5>
-          <span>status : </span>
+          <span style="margin-left: 1rem">status : </span>
 
           <select id="status">
             <option value="given">given</option>
@@ -83,7 +88,19 @@
           <h5 id="f-e" hidden>Please select or enter a formula</h5>
         </div>
         <div class="container">
-          <span>Due : </span><span id="due">0</span>gm
+          <span>Due : </span
+          ><span
+            id="due"
+            style="
+              background-color: black;
+              color: white;
+              border-radius: 1rem;
+              font-weight: 800;
+              padding: 0.5rem;
+            "
+            >0</span
+          >
+          <h5 style="display: inline">gm</h5>
         </div>
         <br />
         <button id="submit-form" type="submit">submit</button>
