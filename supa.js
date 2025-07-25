@@ -27,7 +27,7 @@ getAllDokans();
 
 //add-dokans
 async function addDokan(e) {
-  e.preventDefault();
+  // e.preventDefault();
 
   console.log(addDokanForm);
   const dokanName = document.getElementById("new-dokan-name").value;
