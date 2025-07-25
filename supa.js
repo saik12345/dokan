@@ -6,24 +6,46 @@ const supabaseKey =
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 let options = [];
+let dokanDetails = [];
 
 //get-dokans
 async function getAllDokans() {
-  const { data: dokans, error } = await supabase.from("dokan").select("name");
+  const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
-  dokans?.map((dokan) => {
-    options.push(dokan.name);
-  });
-  console.log(options);
+  if (window.location.href.includes("Dokans")) {
+    dokans?.map((dokan) => {
+      dokanDetails.push({
+        name: dokan.name,
+        mobile: dokan.mobile,
+        email: dokan.email,
+      });
+    });
 
-  options.map((x) => {
-    const option = document.createElement("option");
-    option.textContent = x;
-    option.value = x;
-    dno?.appendChild(option);
-  });
+    dokanDetails.map((dokan) => {
+      // display: flex; flex-wrap: nowrap; gap: 1rem
+      const dokanItem = document.createElement("div");
+      // div.className="span-menu";
+      dokanItem.style.display = "flex";
+      dokanItem.style.flexWrap = "nowrap";
+      dokanItem.style.padding = "0.2rem";
+      dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div><div class="span-menu1">${dokan.mobile}</div><div class="span-menu1">${dokan.email}</div>`;
+
+      dokanArea.append(dokanItem);
+    });
+  } else {
+    dokans?.map((dokan) => {
+      options.push(dokan.name);
+    });
+    console.log(options);
+
+    options.map((x) => {
+      const option = document.createElement("option");
+      option.textContent = x;
+      option.value = x;
+      dno?.appendChild(option);
+    });
+  }
 }
-getAllDokans();
 
 //add-dokans
 async function addDokan(e) {
@@ -100,7 +122,6 @@ async function getTransactions() {
   console.log(transactions);
 
   transactions?.map((t) => {
-    // display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0"
     const row = document.createElement("div");
     row.className = "";
     row.id = t.id;
@@ -109,15 +130,49 @@ async function getTransactions() {
     row.style.margin = 0;
     row.style.paddingRight = "1rem";
     row.style.backgroundColor = "black";
-    row.innerHTML = `<span class="span-menu2">${t.date}</span>
-    <span class="span-menu2">${t.shop_name}</span><span class="span-menu2">${t.Amount}</span>
-    <span class="span-menu2">${t.due}</span><span class="span-menu2">${t.status}</span>
+    row.innerHTML = `<div class="span-menu2">${t.date}</div>
+    <div class="span-menu2">${t.shop_name}</div><div class="span-menu2">${t.Amount}</div>
+    <div class="span-menu2">${t.due}</div><div class="span-menu2">${t.status}</div>
     <button class="del-btn" id="${t.id}" style="background-color:black;padding:0rem 0.4rem;font-size:0.8rem;">❌</button>`;
-    transactionArea.append(row);
+    transactionArea?.append(row);
   });
 }
 
-//index page
+//get-dokan
+async function getDokan() {
+  let { data: dokan, error } = await supabase
+    .from("dokan")
+    .select("name,mobile,email");
+
+  console.log(dokan);
+}
+
+//delete record
+async function deleteRecord(e) {
+  console.log("del");
+  const btn = e.target;
+  const id = btn.id;
+  console.log(id);
+
+  const { error } = await supabase.from("gold").delete().eq("id", id);
+  console.log(error);
+  document.querySelector(`button[id="${id}"]`).parentElement.remove();
+}
+
+//-----------fun calls based on path-----------------
+if (window.location.href.includes("index")) {
+  getAllDokans();
+}
+if (window.location.href.includes("transaction")) {
+  getTransactions();
+}
+if (window.location.href.includes("Dokans")) {
+  getAllDokans();
+}
+
+//--------------------------------------------
+//                HOME PAGE
+//--------------------------------------------
 const status = document.getElementById("status");
 const formula = document.getElementById("formula");
 const dno = document.getElementById("d-n-o");
@@ -126,8 +181,33 @@ const due = document.getElementById("due");
 const amt = document.getElementById("amt");
 const goldForm = document.getElementById("gold-form");
 
-//event listeners
-dno.addEventListener("change", () => {
+//---------------------------------------------------
+//            ADD DOKAN PAGE
+//---------------------------------------------------
+const addDokanForm = document.getElementById("dokan-add");
+const dokanName = document.getElementById("new-dokan-name");
+const mob = document.getElementById("mob");
+const eml = document.getElementById("eml");
+const adr = document.getElementById("adr");
+const addDokanButton = document.getElementById("add-dokan-button");
+
+//-----------------------------------------------
+//                 TRANSACTION PAGE
+//------------------------------------------------
+
+const transactionArea = document.getElementById("transactionArea");
+const delbtn = document.querySelectorAll(".del-btn");
+
+//------------------------------------------------
+//                 DOKANS PAGE
+//-----------------------------------------------
+
+const dokanArea = document.getElementById("dokan-area");
+
+//---------------------------------------------------
+//                  event listeners
+//---------------------------------------------------
+dno?.addEventListener("change", () => {
   console.log(dno.value);
 });
 status?.addEventListener("change", function () {
@@ -141,39 +221,9 @@ amt?.addEventListener("input", calculateDue);
 formula?.addEventListener("change", calculateDue);
 status?.addEventListener("change", calculateDue);
 goldForm?.addEventListener("submit", goldFormData);
-
-// for add dokan
-const addDokanForm = document.getElementById("dokan-add");
-
-const dokanName = document.getElementById("new-dokan-name");
-const mob = document.getElementById("mob");
-const eml = document.getElementById("eml");
-const adr = document.getElementById("adr");
-const addDokanButton = document.getElementById("add-dokan-button");
-addDokanForm?.addEventListener("submit", addDokan);
-
-//for transactions
-
-const transactionArea = document.getElementById("transactionArea");
-getTransactions();
-const delbtn = document.querySelectorAll(".del-btn");
-//
-// delbtn?.forEach((btn) => {
-//   btn.addEventListener("click", deleteRecord);
-// });
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("del-btn")) {
     deleteRecord(e);
   }
 });
-
-async function deleteRecord(e) {
-  console.log("del");
-  const btn = e.target;
-  const id = btn.id;
-  console.log(id);
-
-  const { error } = await supabase.from("gold").delete().eq("id", id);
-  console.log(error);
-  document.querySelector(`button[id="${id}"]`).parentElement.remove();
-}
+addDokanForm?.addEventListener("submit", addDokan);
