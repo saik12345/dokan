@@ -103,6 +103,7 @@ async function getTransactions() {
     // display: flex; gap: 1.5rem; padding-right: 1.2rem; margin: 0"
     const row = document.createElement("div");
     row.className = "";
+    row.id = t.id;
     row.style.display = "flex";
     row.style.gap = "1rem";
     row.style.margin = 0;
@@ -111,7 +112,7 @@ async function getTransactions() {
     row.innerHTML = `<span class="span-menu2">${t.date}</span>
     <span class="span-menu2">${t.shop_name}</span><span class="span-menu2">${t.Amount}</span>
     <span class="span-menu2">${t.due}</span><span class="span-menu2">${t.status}</span>
-    <button id="${t.id}" style="background-color:black;padding:0rem 0.4rem;font-size:0.8rem;">❌</button>`;
+    <button class="del-btn" id="${t.id}" style="background-color:black;padding:0rem 0.4rem;font-size:0.8rem;">❌</button>`;
     transactionArea.append(row);
   });
 }
@@ -155,3 +156,24 @@ addDokanForm?.addEventListener("submit", addDokan);
 
 const transactionArea = document.getElementById("transactionArea");
 getTransactions();
+const delbtn = document.querySelectorAll(".del-btn");
+//
+// delbtn?.forEach((btn) => {
+//   btn.addEventListener("click", deleteRecord);
+// });
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("del-btn")) {
+    deleteRecord(e);
+  }
+});
+
+async function deleteRecord(e) {
+  console.log("del");
+  const btn = e.target;
+  const id = btn.id;
+  console.log(id);
+
+  const { error } = await supabase.from("gold").delete().eq("id", id);
+  console.log(error);
+  document.querySelector(`button[id="${id}"]`).parentElement.remove();
+}
