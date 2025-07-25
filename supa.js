@@ -12,7 +12,7 @@ let dokanDetails = [];
 async function getAllDokans() {
   const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
-  if (window.location.href.includes("Dokans")) {
+  if (window.location.href.includes("dokans")) {
     dokans?.map((dokan) => {
       dokanDetails.push({
         name: dokan.name,
