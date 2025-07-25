@@ -63,13 +63,41 @@ function calculateDue() {
   }
 }
 
+//add gold-form data
+
+async function goldFormData(e) {
+  e.preventDefault();
+  if (!dno.value || !amt.value) {
+    alert("Please fill all fields!");
+    return;
+  }
+  const { data, error } = await supabase
+    .from("gold")
+    .insert([
+      {
+        shop_name: dno.value,
+        formula: status.value == "given" ? Number(formula.value) : 0,
+        due:
+          status.value == "given"
+            ? Number(due.textContent)
+            : -1 * Number(due.textContent),
+        Amount: amt.value,
+        status: status.value,
+      },
+    ])
+    .select();
+  console.log(error);
+  console.log(data);
+  goldForm.reset();
+}
+
 //index page
 const status = document.getElementById("status");
-// const manualInput = document.getElementById("manual");
 const formula = document.getElementById("formula");
 const dno = document.getElementById("d-n-o");
 const due = document.getElementById("due");
 const amt = document.getElementById("amt");
+const goldForm = document.getElementById("gold-form");
 
 //event listeners
 status?.addEventListener("change", function () {
@@ -82,12 +110,14 @@ status?.addEventListener("change", function () {
 amt?.addEventListener("input", calculateDue);
 formula?.addEventListener("change", calculateDue);
 status?.addEventListener("change", calculateDue);
+goldForm?.addEventListener("submit", goldFormData);
 
 // for add dokan
 const addDokanForm = document.getElementById("dokan-add");
-addDokanForm?.addEventListener("submit", addDokan);
+
 const dokanName = document.getElementById("new-dokan-name");
 const mob = document.getElementById("mob");
 const eml = document.getElementById("eml");
 const adr = document.getElementById("adr");
 const addDokanButton = document.getElementById("add-dokan-button");
+addDokanForm?.addEventListener("submit", addDokan);
