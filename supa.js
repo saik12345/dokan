@@ -9,7 +9,7 @@ let options = [];
 
 //get-dokans
 async function getAllDokans() {
-  const { data: dokans, error } = await supabase.from("Dokan").select("name");
+  const { data: dokans, error } = await supabase.from("dokan").select("name");
   console.log(dokans);
   dokans.map((dokan) => {
     options.push(dokan.name);
@@ -39,7 +39,7 @@ async function addDokan(e) {
   const eml = document.getElementById("eml").value;
   const adr = document.getElementById("adr").value;
   const { data, error } = await supabase
-    .from("Dokan")
+    .from("dokan")
     .insert([{ name: dokanName, mobile: mob, email: eml, address: adr }])
     .select();
   if (error) {
