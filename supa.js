@@ -8,11 +8,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 let options = [];
 let dokanDetails = [];
 
-//get-dokans
+//get-dokans (for show dokans page and other dropdown)
+
 async function getAllDokans({ dokanArea = null, dno = null }) {
   const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
-  if (window.location.href.includes("transactions")) {
+  if (window.location.href.includes("dokans")) {
     // console.log("index");
     dokans?.map((dokan) => {
       dokanDetails.push({
@@ -23,7 +24,6 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
     });
 
     dokanDetails.map((dokan) => {
-      // display: flex; flex-wrap: nowrap; gap: 1rem
       const dokanItem = document.createElement("div");
       // div.className="span-menu";
       dokanItem.style.display = "flex";
@@ -72,7 +72,7 @@ async function addDokan(e, addDokanForm) {
   }
 
   addDokanForm?.reset();
-  window.location.href = "index.html";
+  window.location.href = "/dokan/";
 }
 
 //calculate-due
@@ -89,7 +89,7 @@ function calculateDue(status, due, amt, formula) {
 
 //add gold-form data
 
-async function goldFormData(e, dno, amt, status, goldForm) {
+async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
   e.preventDefault();
   if (!dno.value || !amt.value) {
     alert("Please fill all fields!");
@@ -196,20 +196,6 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   // transactionArea.append();
 }
 
-//-----------fun calls based on path-----------------
-// if (
-//   window.location.href.includes("index") ||
-//   window.location.pathname == "/dokan/"
-// ) {
-//   getAllDokans();
-// }
-// if (window.location.href.includes("transaction")) {
-//   getTransactions();
-// }
-// if (window.location.href.includes("Dokans")) {
-//   getAllDokans();
-// }
-
 //--------------------------------------------
 //                HOME PAGE
 //--------------------------------------------
@@ -224,7 +210,7 @@ if (
   const due = document.getElementById("due");
   const amt = document.getElementById("amt");
   const goldForm = document.getElementById("gold-form");
-  getAllDokans({ dno: dno });
+  getAllDokans({ dno });
   //++++++ EVENT LISTENER +++++++++
   dno?.addEventListener("change", () => {
     console.log(dno.value);
@@ -244,7 +230,7 @@ if (
     calculateDue(status, due, amt, formula)
   );
   goldForm?.addEventListener("submit", (e) =>
-    goldFormData(e, dno, amt, status, goldForm)
+    goldFormData(e, dno, amt, status, formula, due, goldForm)
   );
 }
 
@@ -262,6 +248,7 @@ if (window.location.href.includes("addDokan")) {
   const addDokanButton = document.getElementById("add-dokan-button");
   addDokanForm?.addEventListener("submit", (e) => addDokan(e, addDokanForm));
 }
+
 //-----------------------------------------------
 //                 TRANSACTION PAGE
 //------------------------------------------------
@@ -275,7 +262,7 @@ if (window.location.href.includes("transaction")) {
   const delbtn = document.querySelectorAll(".del-btn");
 
   getTransactions(transactionArea);
-  getAllDokans({ dno: dno });
+  getAllDokans({ dno });
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("del-btn")) {
       deleteRecord(e);
