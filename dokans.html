@@ -9,30 +9,48 @@
     <style>
       .span-menu {
         background-color: blueviolet;
+        color: aliceblue;
         padding: 0.5rem;
         display: inline-block;
-        font-size: 1rem;
-        width: 25%;
+        font-size: large;
+        min-width: 16%;
+        overflow-y: auto;
+        overflow-x: auto;
       }
       .span-menu1 {
         background-color: black;
-        color: white;
         padding: 0.5rem;
+        color: white;
+        border-bottom: 0.5px solid white;
         display: inline-block;
-        font-size: 1rem;
-        width: 25%;
+        font-size: medium;
+        min-width: 16%;
+        overflow-y: auto;
+        overflow-x: auto;
+      }
+      .span-menu1::-webkit-scrollbar {
+        display: none;
       }
     </style>
   </head>
   <body>
     <div id="logo"><h1>Dokan</h1></div>
-    <div id="dokan-area">
+    <div id="dokan-area" style="overflow-x: auto">
       <div
-        style="display: flex; flex-wrap: nowrap; gap: 0.2rem; padding: 0.2rem"
+        style="
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 0.1rem;
+          padding: 0;
+          /* overflow-x: auto; */
+        "
       >
         <div class="span-menu">Dokan Name</div>
         <div class="span-menu">Mobile Number</div>
         <div class="span-menu">Email</div>
+        <div class="span-menu"></div>
+        <div class="span-menu"></div>
+        <div class="span-menu"></div>
       </div>
     </div>
   </body>

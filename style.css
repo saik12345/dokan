@@ -8,6 +8,7 @@ body {
   background-color: #575a60;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 a {
   text-decoration: none;
@@ -83,7 +84,8 @@ select {
   padding: 1.5rem;
 }
 #submit-form {
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
+  font-size: medium;
 }
 #add-dokan-button {
   padding: 10px 15px;
@@ -95,6 +97,7 @@ select {
 .container {
   background-color: #1db954;
   /* border-radius: 1.2rem; */
+  
   text-align: center;
   padding: 1.5rem;
   padding: 0.8rem;
