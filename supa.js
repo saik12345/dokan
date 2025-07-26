@@ -9,10 +9,11 @@ let options = [];
 let dokanDetails = [];
 
 //get-dokans
-async function getAllDokans({ dokanArea = null, dno = null } = {}) {
+async function getAllDokans({ dokanArea = null, dno = null }) {
   const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
-  if (window.location.href.includes("dokans")) {
+  if (window.location.href.includes("transactions")) {
+    // console.log("index");
     dokans?.map((dokan) => {
       dokanDetails.push({
         name: dokan.name,
@@ -70,7 +71,8 @@ async function addDokan(e, addDokanForm) {
     console.log(data);
   }
 
-  addDokanForm.reset();
+  addDokanForm?.reset();
+  window.location.href = "index.html";
 }
 
 //calculate-due
@@ -195,20 +197,26 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
 }
 
 //-----------fun calls based on path-----------------
-if (window.location.href.includes("index")) {
-  getAllDokans();
-}
-if (window.location.href.includes("transaction")) {
-  getTransactions();
-}
-if (window.location.href.includes("Dokans")) {
-  getAllDokans();
-}
+// if (
+//   window.location.href.includes("index") ||
+//   window.location.pathname == "/dokan/"
+// ) {
+//   getAllDokans();
+// }
+// if (window.location.href.includes("transaction")) {
+//   getTransactions();
+// }
+// if (window.location.href.includes("Dokans")) {
+//   getAllDokans();
+// }
 
 //--------------------------------------------
 //                HOME PAGE
 //--------------------------------------------
-if (window.location.pathname === "/dokan/") {
+if (
+  window.location.pathname.includes("index") ||
+  window.location.pathname == "/dokan/"
+) {
   const status = document.getElementById("status");
   const formula = document.getElementById("formula");
   const dno = document.getElementById("d-n-o");
@@ -252,7 +260,7 @@ if (window.location.href.includes("addDokan")) {
   const eml = document.getElementById("eml");
   const adr = document.getElementById("adr");
   const addDokanButton = document.getElementById("add-dokan-button");
-  addDokanForm?.addEventListener("submit", () => addDokan(addDokanForm));
+  addDokanForm?.addEventListener("submit", (e) => addDokan(e, addDokanForm));
 }
 //-----------------------------------------------
 //                 TRANSACTION PAGE
