@@ -208,7 +208,7 @@ if (window.location.href.includes("Dokans")) {
 //--------------------------------------------
 //                HOME PAGE
 //--------------------------------------------
-if (window.location.href.includes("index")) {
+if (window.location.pathname === "/") {
   const status = document.getElementById("status");
   const formula = document.getElementById("formula");
   const dno = document.getElementById("d-n-o");
