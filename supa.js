@@ -195,6 +195,15 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
 }
 
 //-----------fun calls based on path-----------------
+if (window.location.href.includes("index")) {
+  getAllDokans();
+}
+if (window.location.href.includes("transaction")) {
+  getTransactions();
+}
+if (window.location.href.includes("Dokans")) {
+  getAllDokans();
+}
 
 //--------------------------------------------
 //                HOME PAGE
