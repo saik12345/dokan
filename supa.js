@@ -214,7 +214,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
 //                HOME PAGE
 //--------------------------------------------
 if (
-  window.location.pathname.includes("index") ||
+  window.location.href.includes("index") ||
   window.location.pathname == "/dokan/"
 ) {
   const status = document.getElementById("status");
