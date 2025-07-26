@@ -9,7 +9,7 @@ let options = [];
 let dokanDetails = [];
 
 //get-dokans
-async function getAllDokans({ dokanArea = null, dno = null }) {
+async function getAllDokans({ dokanArea = null, dno = null } = {}) {
   const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
   if (window.location.href.includes("dokans")) {
@@ -30,7 +30,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.style.padding = "0.2rem";
       dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div><div class="span-menu1">${dokan.mobile}</div><div class="span-menu1">${dokan.email}</div>`;
 
-      dokanArea.append(dokanItem);
+      dokanArea?.append(dokanItem);
     });
   } else {
     dokans?.map((dokan) => {
