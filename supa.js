@@ -295,7 +295,6 @@ if (
 //---------------------------------------------------
 
 if (window.location.href.includes("addDokan")) {
-  // getTransactions();
   const addDokanForm = document.getElementById("dokan-add");
   const dokanName = document.getElementById("new-dokan-name");
   const mob = document.getElementById("mob");
