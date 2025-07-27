@@ -84,8 +84,11 @@ select {
   padding: 1.5rem;
 }
 #submit-form {
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   font-size: medium;
+  background-color: blueviolet;
+  border: 1px solid white;
+  box-shadow: 2px 4px black;
 }
 #add-dokan-button {
   padding: 10px 15px;
