@@ -8,9 +8,20 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 let options = [];
 let dokanDetails = [];
 
+/* HTML: <div class="loader"></div> */
+
+const loader = document.createElement("div");
+loader.id = "loader";
+
+const spinner = document.createElement("div");
+spinner.className = "spinner";
+
+loader.appendChild(spinner);
+
 //get-dokans (for show dokans page and other dropdown)
 
 async function getAllDokans({ dokanArea = null, dno = null }) {
+  dokanArea.append(loader);
   const { data: dokans, error } = await supabase.from("dokan").select("*");
   console.log(dokans);
   if (window.location.href.includes("dokans")) {
@@ -23,6 +34,9 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
         email: dokan.email,
       });
     });
+    if (dokanDetails) {
+      document.getElementById("loader")?.remove();
+    }
 
     dokanDetails.forEach(async (dokan) => {
       const dokanItem = document.createElement("div");
@@ -109,6 +123,7 @@ async function addDokan(e, addDokanForm) {
   }
 
   addDokanForm?.reset();
+  due;
   window.location.href = "/dokan/";
 }
 
@@ -150,6 +165,7 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
   console.log(error);
   console.log(data);
   goldForm.reset();
+  due.textContent = 0;
 }
 //get-row
 function getRow(t) {
@@ -170,9 +186,14 @@ function getRow(t) {
 //get-transactions
 
 async function getTransactions(transactionArea) {
+  transactionArea.append(loader);
   let { data: transactions, error } = await supabase
     .from("gold")
     .select("id,shop_name,date,due,Amount,status");
+
+  if (transactions) {
+    document.getElementById("loader")?.remove();
+  }
   console.log(transactions);
 
   transactions?.map((t) => {
