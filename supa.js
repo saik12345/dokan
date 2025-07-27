@@ -200,7 +200,13 @@ function getTransactionRow(t) {
   })}</div>
     <div class="span-menu2">${t.shop_name}</div>
     <div class="span-menu2">${t.Amount}</div>
-    <div class="span-menu2">${t.due}</div>
+    <div class="span-menu2">${
+      t.due < 0
+        ? t.due +
+          '<hr style="border:3px solid red;width:1rem;margin:1px auto"/>'
+        : t.due +
+          '<hr style="border:3px solid green;width:1rem;margin:1px auto"/>'
+    }</div>
     <div class="span-menu2">${t.formula == 0 ? "no formula" : t.formula}</div>
     <div class="span-menu2">${t.status}</div>
     <div class="span-menu2">${t.profit}</div>
