@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=A, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="supa.js" type="module" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="logo">
+      <h1>Add dokan</h1>
+    </div>
+    <div>
+      <form id="dokan-add" action="#">
+        <div class="container">
+          <span>Enter Dokan Name : </span>
+          <input style="width: fit-content" type="text" id="new-dokan-name" />
+        </div>
+
+        <div class="container">
+          <span>Mobile number : </span>
+          <input
+            id="mob"
+            style="width: fit-content"
+            type="text"
+            maxlength="10"
+            minlength="10"
+          />
+        </div>
+
+        <div class="container">
+          <span>email : </span>
+          <input id="eml" style="width: fit-content" type="text" />
+        </div>
+
+        <div class="container">
+          <span>Address : </span>
+          <input id="adr" style="width: fit-content" type="text" />
+        </div>
+        <button
+          id="add-dokan-button"
+          type="submit"
+          style="
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(91, 35, 155, 0.584);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid black;
+          "
+        >
+          Submit
+        </button>
+        <a
+          id="back"
+          href="index.html"
+          style="
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: rgba(91, 35, 155, 0.584);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid black;
+          "
+          >Back</a
+        >
+      </form>
+    </div>
+  </body>
+</html>

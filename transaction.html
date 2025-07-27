@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="supa.js" defer></script>
+    <style>
+      .span-menu {
+        color: white;
+        /* background-color: blueviolet; */
+        /* margin: 5px 10px; */
+        /* border-radius: 10px; */
+        border-right: 2px solid black;
+        padding: 0.8rem;
+        font-size: small;
+        display: inline-block;
+        width: 14%;
+      }
+      .span-menu2 {
+        color: white;
+        /* background-color: blueviolet; */
+        /* margin: 0 px 5px; */
+        border-radius: 10px;
+        border: 2px solid black;
+        padding: 0.8rem;
+        display: inline-block;
+        width: 14%;
+        text-align: left;
+        font-size: small;
+        /* text-align: center; */
+        /* overflow: auto; */
+      }
+      .filters {
+        color: white;
+        background-color: blueviolet;
+        margin: 5px 10px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="logo"><h1>Transactions</h1></div>
+    <div>
+      <div class="filters">
+        Dokan name :
+        <select name="dokans" id="d-n-o" required>
+          <option value="None" selected>Select a dokan</option>
+        </select>
+      </div>
+      <div class="filters">
+        <label for="from-date">From: </label
+        ><input type="date" style="width: fit-content" id="from-date" />
+      </div>
+      <div class="filters">
+        <label for="to-date">To:</label
+        ><input type="date" style="width: fit-content" id="to-date" />
+      </div>
+      <div class="filters">
+        Status :
+        <select id="status-data">
+          <option value="None">Select (given/received)</option>
+          <option value="given">given</option>
+          <option value="received">received</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      style="
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0;
+        margin: 0;
+        background-color: blueviolet;
+      "
+    >
+      <div class="span-menu">Date</div>
+      <div class="span-menu">Dokan</div>
+      <div class="span-menu">Amount</div>
+      <div class="span-menu">Due</div>
+      <div class="span-menu">Status</div>
+    </div>
+
+    <div
+      id="transactionArea"
+      style="overflow-x: auto; padding: 0; margin: 0"
+    ></div>
+  </body>
+</html>
