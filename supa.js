@@ -54,13 +54,13 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       <div  class="dokan-delete span-menu1" style="display:flex;align-items:center">
       <span id="dokan-delete-${
         dokan.id
-      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem" class="dokan-delete">delete</span>
+      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem" class="dokan-delete">delete</span>
       </div>
       <div  class="dokan-show span-menu1" style="display:flex;align-items:center">
 
       <span id="dokan-show-${
         dokan.id
-      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem">view<span/></div>
+      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem">view<span/></div>
       <div class="span-menu1" id="dokan-due-${
         dokan.id
       }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem'>${
@@ -175,19 +175,25 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
   due.textContent = 0;
 }
 //get-row
-function getRow(t) {
+function getTransactionRow(t) {
   const row = document.createElement("div");
-  row.className = "";
   row.id = t.id;
   row.style.display = "flex";
-  row.style.gap = "1rem";
+  // row.style.alignItems = "center";
   row.style.margin = 0;
-  row.style.paddingRight = "1rem";
+  row.style.padding = 0;
+  row.style.gap = "0.1rem";
   row.style.backgroundColor = "black";
+  row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${t.date}</div>
-    <div class="span-menu2">${t.shop_name}</div><div class="span-menu2">${t.Amount}</div>
-    <div class="span-menu2">${t.due}</div><div class="span-menu2">${t.status}</div>
-    <button class="del-btn" id="${t.id}" style="background-color:black;padding:0rem 0.4rem;font-size:0.8rem;">❌</button>`;
+    <div class="span-menu2">${t.shop_name}</div>
+    <div class="span-menu2">${t.Amount}</div>
+    <div class="span-menu2">${t.due}</div>
+    <div class="span-menu2">${t.formula == 0 ? "no formula" : t.formula}</div>
+    <div class="span-menu2">${t.status}</div>
+    <div class="span-menu2">${t.profit}</div>
+    <div class="span-menu2 del-btn"><span  class="del-btn" id="t-del-${t.id}"
+     style="background-color:red;color:white;padding:0.2rem 0.4rem;font-size:0.8rem;border-radius:1.2rem;cursor:pointer">delete</span></div>`;
   return row;
 }
 //get-transactions
@@ -196,7 +202,7 @@ async function getTransactions(transactionArea) {
   transactionArea?.append(loader);
   let { data: transactions, error } = await supabase
     .from("gold")
-    .select("id,shop_name,date,due,Amount,status");
+    .select("id,shop_name,date,due,Amount,status,formula,profit");
 
   if (transactions) {
     document.getElementById("loader")?.remove();
@@ -204,22 +210,14 @@ async function getTransactions(transactionArea) {
   console.log(transactions);
 
   transactions?.map((t) => {
-    const row = getRow(t);
+    const row = getTransactionRow(t);
     transactionArea?.append(row);
   });
 }
 
-//get-dokan
-async function getDokan() {
-  let { data: dokan, error } = await supabase
-    .from("dokan")
-    .select("name,mobile,email");
-
-  console.log(dokan);
-}
-
 //delete record
 async function deleteRecord(e) {
+  console.log("called");
   if (
     window.location.pathname == "/dokan/transaction.html" ||
     window.location.href.includes("transaction")
@@ -229,9 +227,12 @@ async function deleteRecord(e) {
     const id = btn.id;
     console.log(id);
 
-    const { error } = await supabase.from("gold").delete().eq("id", id);
+    const { error } = await supabase
+      .from("gold")
+      .delete()
+      .eq("id", id.split("-")[2]);
     console.log(error);
-    document.querySelector(`button[id="${id}"]`).parentElement.remove();
+    document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
   } else if (
     window.location.pathname == "/dokan/dokans.html" ||
     window.location.href.includes("dokans")
