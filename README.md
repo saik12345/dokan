@@ -1,2 +1,0 @@
-# dokan
-gold
