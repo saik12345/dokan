@@ -21,11 +21,13 @@ loader.appendChild(spinner);
 //get-dokans (for show dokans page and other dropdown)
 
 async function getAllDokans({ dokanArea = null, dno = null }) {
-  dokanArea.append(loader);
+  document.body.appendChild(loader);
   const { data: dokans, error } = await supabase.from("dokan").select("*");
+
   console.log(dokans);
   if (window.location.href.includes("dokans")) {
     // console.log("index");
+
     dokans?.map((dokan) => {
       dokanDetails.push({
         id: dokan.id,
@@ -34,9 +36,6 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
         email: dokan.email,
       });
     });
-    if (dokanDetails) {
-      document.getElementById("loader")?.remove();
-    }
 
     dokanDetails.forEach(async (dokan) => {
       const dokanItem = document.createElement("div");
@@ -70,7 +69,15 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
 
       dokanArea?.append(dokanItem);
     });
+    if (dokans && dokanDetails) {
+      console.log("loading finished");
+      document.getElementById("loader")?.remove();
+    }
   } else {
+    if (dokans) {
+      console.log("loading finished");
+      document.getElementById("loader")?.remove();
+    }
     dokans?.map((dokan) => {
       options.push(dokan.name);
     });
@@ -186,7 +193,7 @@ function getRow(t) {
 //get-transactions
 
 async function getTransactions(transactionArea) {
-  transactionArea.append(loader);
+  transactionArea?.append(loader);
   let { data: transactions, error } = await supabase
     .from("gold")
     .select("id,shop_name,date,due,Amount,status");
