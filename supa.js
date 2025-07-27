@@ -33,20 +33,21 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.style.flexWrap = "nowrap";
       dokanItem.style.padding = "0";
       dokanItem.style.gap = "0.1rem";
+      dokanItem.id = dokan.id;
 
       dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div>
       <div class="span-menu1">${dokan.mobile}</div>
       <div class="span-menu1">${dokan.email}</div>
-      <div id="dokan-delete-${
+      <div  class="dokan-delete span-menu1" style="display:flex;align-items:center">
+      <span id="dokan-delete-${
         dokan.id
-      }" class="dokan-delete span-menu1" style="display:flex;align-items:center">
-      <span style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem">delete</span>
+      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem" class="dokan-delete">delete</span>
       </div>
-      <div id="dokan-show-${
-        dokan.id
-      }" class="dokan-show span-menu1" style="display:flex;align-items:center">
+      <div  class="dokan-show span-menu1" style="display:flex;align-items:center">
 
-      <span style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem">view<span/></div>
+      <span id="dokan-show-${
+        dokan.id
+      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.8rem">view<span/></div>
       <div class="span-menu1" id="dokan-due-${
         dokan.id
       }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem'>${
@@ -208,13 +209,15 @@ async function deleteRecord(e) {
     window.location.href.includes("dokans")
   ) {
     console.log(e);
-    const div = e.target;
-    const id = div.id;
+    const el = e.target;
+    console.log(el);
+    const id = el.id;
+    console.log(el.id);
     const { error } = await supabase
       .from("dokan")
       .delete()
       .eq("id", id.split("-")[2]);
-    document.querySelector(`div[id="${id}"]`).parentElement.remove();
+    document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
   }
 }
 
@@ -368,6 +371,7 @@ if (window.location.href.includes("dokans")) {
   getAllDokans({ dokanArea });
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("dokan-delete")) {
+      console.log("del");
       deleteRecord(e);
     }
   });
