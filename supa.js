@@ -275,7 +275,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   console.log(transactions);
   console.log(error);
   transactions?.map((t) => {
-    const row = getRow(t);
+    const row = getTransactionRow(t);
     transactionArea.append(row);
   });
   // transactionArea.append();
