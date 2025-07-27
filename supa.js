@@ -166,6 +166,12 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
             : -1 * Number(due.textContent),
         Amount: amt.value,
         status: status.value,
+        profit:
+          status.value == "given"
+            ? (((Number(frml.value) - 92) / 99.5) * Number(amt.value)).toFixed(
+                2
+              )
+            : 0,
       },
     ])
     .select();
@@ -185,7 +191,13 @@ function getTransactionRow(t) {
   row.style.gap = "0.1rem";
   row.style.backgroundColor = "black";
   row.id = t.id;
-  row.innerHTML = `<div class="span-menu2">${t.date}</div>
+  row.innerHTML = `<div class="span-menu2">${new Date(
+    t.date
+  ).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })}</div>
     <div class="span-menu2">${t.shop_name}</div>
     <div class="span-menu2">${t.Amount}</div>
     <div class="span-menu2">${t.due}</div>
