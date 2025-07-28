@@ -18,13 +18,19 @@ loader.appendChild(spinner);
 
 const loader1 = document.createElement("div");
 loader1.id = "loader1";
-loader1.appendChild(spinner);
+const spinner1 = document.createElement("div");
+spinner1.className = "spinner";
+loader1.appendChild(spinner1);
 
 //Confirmer
 
 const confirmer = document.createElement("div");
-confirmer.id = "confirmer";
-confirmer.appe;
+confirmer.id = "loader";
+const confirmMessage = document.createElement("div");
+confirmMessage.className = "confirm";
+confirmMessage.innerHTML = `<h3>Are you sure ?</h3>
+<button class="cb" id="yes">yes</button><button class="cb" id="no">No</button>`;
+confirmer.append(confirmMessage);
 
 //get-dokans (for show dokans page and other dropdown)
 
@@ -247,17 +253,25 @@ async function deleteRecord(e) {
     window.location.pathname == "/dokan/transaction.html" ||
     window.location.href.includes("transaction")
   ) {
-    console.log("del");
-    const btn = e.target;
-    const id = btn.id;
-    console.log(id);
+    let confStat = "";
+    document.body.appendChild(confirmer);
+    document.getElementById("yes").addEventListener("click", async () => {
+      confirmer.remove();
+      console.log("del");
+      const btn = e.target;
+      const id = btn.id;
+      console.log(id);
 
-    const { error } = await supabase
-      .from("gold")
-      .delete()
-      .eq("id", id.split("-")[2]);
-    console.log(error);
-    document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
+      const { error } = await supabase
+        .from("gold")
+        .delete()
+        .eq("id", id.split("-")[2]);
+      console.log(error);
+      document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
+    });
+    document.getElementById("no").addEventListener("click", () => {
+      confirmer.remove();
+    });
   } else if (
     window.location.pathname == "/dokan/dokans.html" ||
     window.location.href.includes("dokans")

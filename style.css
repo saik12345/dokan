@@ -125,8 +125,8 @@ select {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255, 255, 255, 0.5); /* semi-transparent white */
-  /* backdrop-filter: blur(5px); */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,16 +148,17 @@ select {
   }
 }
 
-#confirm {
-  position: fixed;
+.confirm {
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.5); /* semi-transparent white */
-  backdrop-filter: blur(2px);
-  display: flex;
-  justify-content: center;
+  width: 40%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid black;
   align-items: center;
   z-index: 9999;
+}
+
+.cb {
+  padding: 0.5rem 1rem;
+  margin: 5px 5px;
 }
