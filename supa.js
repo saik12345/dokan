@@ -222,9 +222,12 @@ function getTransactionRow(t) {
       t.status == "given" ? "green" : "red"
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
-    <div class="span-menu2"></div>
-    <div class="span-menu2 del-btn"><span  class="del-btn" id="t-del-${t.id}"
-     style="background-color:red;color:white;padding:0.2rem 0.4rem;font-size:0.8rem;border-radius:1.2rem;cursor:pointer">delete</span></div>`;
+    <div class="span-menu2">
+    <span class="edit-btn" id="t-edit-${t.id}">edit</span>
+    </div>
+    <div class="span-menu2"><span class="del-btn" id="t-del-${t.id}"
+     >delete</span></div>
+     `;
   return row;
 }
 //get-transactions
@@ -340,6 +343,9 @@ if (
   const goldForm = document.getElementById("gold-form");
   getAllDokans({ dno });
   //++++++ EVENT LISTENER +++++++++
+  // document.getElementById('balance-show').addEventListener(()=>{
+  //   const data
+  // })
   dno?.addEventListener("change", () => {
     console.log(dno.value);
   });

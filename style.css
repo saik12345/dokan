@@ -152,8 +152,9 @@ select {
   top: 0;
   left: 0;
   width: 40%;
-  background: rgba(255, 255, 255, 0.5);
+  background: aliceblue;
   border: 2px solid black;
+  border-radius: 1.5rem;
   align-items: center;
   z-index: 9999;
 }
@@ -161,4 +162,22 @@ select {
 .cb {
   padding: 0.5rem 1rem;
   margin: 5px 5px;
+}
+
+.del-btn {
+  background-color: red;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  font-size: small;
+  border-radius: 1.2rem;
+  cursor: pointer;
+}
+.edit-btn {
+  background-color: rgba(237, 237, 60, 0.85);
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 0.8rem;
+  font-size: small;
+  border-radius: 1.2rem;
+  cursor: pointer;
 }
