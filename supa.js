@@ -194,7 +194,7 @@ function getTransactionRow(t) {
   row.style.margin = 0;
   row.style.padding = 0;
   row.style.gap = "0.1rem";
-  row.style.backgroundColor = `${t.status == "given" ? "green" : "red"}`;
+  row.style.backgroundColor = "white";
   // row.style.justifyContent = "center";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
