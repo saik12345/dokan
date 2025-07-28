@@ -64,8 +64,12 @@ select {
 #d-n {
   background-color: #1db954;
   /* border-radius: 1.2rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   text-align: center;
-  padding: 1.5rem;
+  padding: 0.5rem 0;
 }
 #d-n button {
   margin-left: 1.2rem;
@@ -77,19 +81,11 @@ select {
   /* border-radius: 1.2rem; */
   text-align: center;
 }
-#for {
-  background-color: #1db954;
-  /* border-radius: 1.2rem; */
-  text-align: center;
-  height: 1.8rem;
-  padding: 1.5rem;
-}
+
 #submit-form {
   padding: 0.5rem 1.5rem;
   font-size: medium;
-  /* background-color: blueviolet; */
-  /* border: 1px solid white;
-  box-shadow: 2px 4px black; */
+  display: block;
 }
 #add-dokan-button {
   padding: 10px 15px;
@@ -101,10 +97,12 @@ select {
 .container {
   background-color: #1db954;
   /* border-radius: 1.2rem; */
-
+  display: flex;
+  justify-content: center;
   text-align: center;
   /* padding: 1.5rem; */
-  padding: 0.8rem;
+  align-items: center;
+  padding: 0.5rem 0rem;
 }
 #loader {
   position: fixed;

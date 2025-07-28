@@ -58,8 +58,10 @@
     <div id="form-container">
       <form action="#" id="gold-form">
         <div id="d-n">
-          <span>Dokan name : </span>
-          <select id="d-n-o"></select>
+          <div>
+            Dokan name :
+            <select id="d-n-o"></select>
+          </div>
           <!-- <div
             style="
               background-color: blueviolet;
@@ -71,40 +73,41 @@
               margin: 15px auto;
             "
           > -->
-          <a
-            href="addDokan.html"
-            style="
-              display: block;
-              background-color: blueviolet;
-              border-radius: 25px;
-              padding: 0.5rem 0.8rem;
-              border-bottom: solid black;
-              border-right: solid black;
-              width: fit-content;
-              text-align: center;
-              margin: 15px auto;
-            "
-          >
-            Add new Dokan</a
-          >
+          <div>
+            <a
+              href="addDokan.html"
+              style="
+                display: block;
+                background-color: blueviolet;
+                border-radius: 25px;
+                padding: 0.5rem 0.8rem;
+                border-bottom: solid black;
+                border-right: solid black;
+                width: fit-content;
+                text-align: center;
+                margin: 15px auto;
+              "
+            >
+              Add new Dokan</a
+            >
+          </div>
 
           <!-- </div> -->
         </div>
-        <div class="container" style="display: flex; justify-content: center">
-          <span
-            >Amount : <input id="amt" type="number" /> gm
+        <div class="container">
+          <div>
+            Amount : <input id="amt" type="number" /> gm
             <h5 id="a-e" hidden>please enter amount</h5>
-          </span>
-          <span style="margin-left: 1rem"
-            >status :
+          </div>
+          <div style="margin-left: 1rem">status :</div>
 
-            <select id="status">
-              <option value="given">given</option>
-              <option value="received">received</option>
-            </select>
-          </span>
+          <select id="status">
+            <option value="given">given</option>
+            <option value="received">received</option>
+          </select>
         </div>
-        <div id="for">
+
+        <div class="container">
           <span>Formula</span>
 
           <select id="formula">
@@ -119,17 +122,10 @@
           <!-- <input id="manual" type="number" hidden value="0" /> -->
           <h5 id="f-e" hidden>Please select or enter a formula</h5>
         </div>
-        <div
-          class="container"
-          style="
-            display: flex;
-            justify-content: space-around;
-            flex-direction: column;
-          "
-        >
+        <div class="container">
           <div>
-            <span>Due : </span
-            ><span
+            Due :
+            <span
               id="due"
               style="
                 background-color: black;
@@ -142,9 +138,9 @@
             >
             <h5 style="display: inline">gm</h5>
           </div>
-          <div style="text-align: center; padding: 0; margin-top: 0.5rem">
-            <button id="submit-form" type="submit">Submit</button>
-          </div>
+        </div>
+        <div class="container">
+          <button id="submit-form" type="submit">Submit</button>
         </div>
       </form>
     </div>
