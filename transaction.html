@@ -29,6 +29,7 @@
         padding: 0.8rem;
         /* display: inline-block; */
         min-width: 12%;
+        width: fit-content;
         text-align: center;
         font-size: medium;
         overflow-x: auto;
@@ -50,62 +51,71 @@
     </style>
   </head>
   <body>
-    <div
-      id="logo"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <h1>Transaction</h1>
-      <a
-        href="index.html"
+    <div style="padding: 0; margin: 0">
+      <div
+        id="logo"
         style="
-          background-color: black;
-          padding: 0.2rem 0.6rem;
-          border-radius: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         "
-        >back</a
       >
-    </div>
-    <div class="filters">
-      Dokan name :
-      <select name="dokans" id="d-n-o" required>
-        <option value="None" selected>Select a dokan</option>
-      </select>
-    </div>
-    <div class="filters">
-      <label for="from-date">From: </label
-      ><input type="date" style="width: fit-content" id="from-date" />
-    </div>
-    <div class="filters">
-      <label for="to-date">To:</label
-      ><input type="date" style="width: fit-content" id="to-date" />
-    </div>
-    <div class="filters">
-      Status :
-      <select id="status-data">
-        <option value="None">Select (given/received)</option>
-        <option value="given">given</option>
-        <option value="received">received</option>
-      </select>
-    </div>
-    <div id="transactionArea" style="overflow-x: auto; padding: 0; margin: 0">
-      <div style="padding: 0">
-        <div
+        <h1>Transaction</h1>
+        <a
+          href="index.html"
           style="
-            display: flex;
-            flex-wrap: nowrap;
-            padding: 0;
-            margin: 0;
-            gap: 0.1rem;
+            background-color: black;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
           "
+          >back</a
         >
-          <div class="span-menu">Date</div>
-          <div class="span-menu">Dokan</div>
-          <div class="span-menu">Amount</div>
-          <div class="span-menu">Due</div>
-          <div class="span-menu">Formula Used</div>
-          <div class="span-menu">Status</div>
-          <div class="span-menu">Profit</div>
-          <div class="span-menu"></div>
+      </div>
+      <div class="filters">
+        Dokan name :
+        <select name="dokans" id="d-n-o" required>
+          <option value="None" selected>Select a dokan</option>
+        </select>
+      </div>
+      <div class="filters">
+        <label for="from-date">From: </label
+        ><input type="date" style="width: fit-content" id="from-date" />
+      </div>
+      <div class="filters">
+        <label for="to-date">To:</label
+        ><input type="date" style="width: fit-content" id="to-date" />
+      </div>
+      <div class="filters">
+        Status :
+        <select id="status-data">
+          <option value="None">Select (given/received)</option>
+          <option value="given">given</option>
+          <option value="received">received</option>
+        </select>
+      </div>
+      <div
+        id="transactionArea"
+        style="padding: 0; margin: 0; overflow-x: auto; background-color: white"
+      >
+        <div style="padding: 0">
+          <div
+            style="
+              display: flex;
+              flex-wrap: nowrap;
+              padding: 0;
+              margin: 0;
+              gap: 0.1rem;
+            "
+          >
+            <div class="span-menu">Date</div>
+            <div class="span-menu">Dokan</div>
+            <div class="span-menu">Amount</div>
+            <div class="span-menu">Formula Used</div>
+            <div class="span-menu">Due</div>
+            <div class="span-menu">Profit</div>
+            <div class="span-menu"></div>
+            <div class="span-menu"></div>
+          </div>
         </div>
       </div>
     </div>

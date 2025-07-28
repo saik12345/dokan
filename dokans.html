@@ -13,7 +13,7 @@
         padding: 0.5rem;
         /* display: inline-block; */
         font-size: medium;
-        min-width: 14%;
+        width: 25%;
         overflow-y: auto;
         overflow-x: auto;
         border-right: 2px solid black;
@@ -24,9 +24,9 @@
         color: white;
 
         border-right: 2px solid white;
-        /* display: inline-block; */
+        text-align: center;
         font-size: small;
-        min-width: 14%;
+        width: 25%;
         overflow-y: auto;
         overflow-x: auto;
       }
@@ -39,29 +39,46 @@
     </style>
   </head>
   <body>
-    <div
-      id="logo"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <h1>Dokan</h1>
-      <a
-        href="index.html"
+    <div style="padding: 0; margin: 0">
+      <div
+        id="logo"
         style="
-          background-color: black;
-          padding: 0.2rem 0.6rem;
-          border-radius: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         "
-        >back</a
       >
-    </div>
-    <div id="dokan-area" style="overflow-x: auto; padding: 0.5rem 0.5rem">
-      <div style="display: flex; flex-wrap: nowrap; gap: 0.1rem; padding: 0">
-        <div class="span-menu">Dokan Name</div>
-        <div class="span-menu">Mobile Number</div>
-        <div class="span-menu">Email</div>
-        <div class="span-menu"></div>
-        <div class="span-menu"></div>
-        <div class="span-menu"></div>
+        <h1>Dokan</h1>
+        <a
+          href="index.html"
+          style="
+            background-color: black;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
+          "
+          >back</a
+        >
+      </div>
+      <div
+        id="dokan-area"
+        style="overflow-x: auto; padding: 0.5rem 0.5rem; width: 100%"
+      >
+        <div
+          style="
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.1rem;
+            padding: 0;
+            width: 100vw;
+          "
+        >
+          <div class="span-menu">Dokan Name</div>
+          <div class="span-menu">Summary</div>
+          <!-- <div class="span-menu">Mobile Number</div>
+        <div class="span-menu">Email</div> -->
+          <div class="span-menu"></div>
+          <div class="span-menu"></div>
+        </div>
       </div>
     </div>
   </body>

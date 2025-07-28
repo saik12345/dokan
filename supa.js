@@ -54,23 +54,22 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.id = dokan.id;
 
       dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div>
-      <div class="span-menu1">${dokan.mobile}</div>
-      <div class="span-menu1">${dokan.email}</div>
-      <div  class="dokan-delete span-menu1" style="display:flex;align-items:center">
-      <span id="dokan-delete-${
-        dokan.id
-      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem" class="dokan-delete">delete</span>
-      </div>
-      <div  class="dokan-show span-menu1" style="display:flex;align-items:center">
-
-      <span id="dokan-show-${
-        dokan.id
-      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem">view<span/></div>
       <div class="span-menu1" id="dokan-due-${
         dokan.id
       }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem;padding:0.1rem 0.5rem'>${
         dueTotal < 0 ? "to pay" : "to be received"
-      }</p></div>`;
+      }</p></div>
+      <div  class="dokan-delete span-menu1" style="display:flex;align-items:center;justify-content:center">
+      <span id="dokan-delete-${
+        dokan.id
+      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem" class="dokan-delete">delete</span>
+      </div>
+      <div  class="dokan-show span-menu1" style="display:flex;align-items:center;justify-content:center">
+
+      <span id="dokan-show-${
+        dokan.id
+      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;">view<span/></div>
+      `;
 
       dokanArea?.append(dokanItem);
     });
@@ -195,6 +194,7 @@ function getTransactionRow(t) {
   row.style.padding = 0;
   row.style.gap = "0.1rem";
   row.style.backgroundColor = "white";
+  // row.style.width = "fit-content";
   // row.style.justifyContent = "center";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
@@ -206,6 +206,7 @@ function getTransactionRow(t) {
   })}</div>
     <div class="span-menu2">${t.shop_name}</div>
     <div class="span-menu2">${t.Amount}</div>
+    <div class="span-menu2">${t.formula == 0 ? "no formula" : t.formula}</div>
     <div class="span-menu2">${
       t.due < 0
         ? t.due +
@@ -213,9 +214,8 @@ function getTransactionRow(t) {
         : t.due +
           '<hr style="border:3px solid green;width:1rem;margin:1px auto"/>'
     }</div>
-    <div class="span-menu2">${t.formula == 0 ? "no formula" : t.formula}</div>
-    <div class="span-menu2">${t.status}</div>
     <div class="span-menu2">${t.profit}</div>
+    <div class="span-menu2"></div>
     <div class="span-menu2 del-btn"><span  class="del-btn" id="t-del-${t.id}"
      style="background-color:red;color:white;padding:0.2rem 0.4rem;font-size:0.8rem;border-radius:1.2rem;cursor:pointer">delete</span></div>`;
   return row;
