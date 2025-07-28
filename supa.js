@@ -16,6 +16,10 @@ const spinner = document.createElement("div");
 spinner.className = "spinner";
 loader.appendChild(spinner);
 
+const loader1 = document.createElement("div");
+loader1.id = "loader1";
+loader1.appendChild(spinner);
+
 //Confirmer
 
 const confirmer = document.createElement("div");
@@ -220,7 +224,7 @@ function getTransactionRow(t) {
 //get-transactions
 
 async function getTransactions(transactionArea) {
-  transactionArea?.append(loader);
+  document.body.append(loader);
   let { data: transactions, error } = await supabase
     .from("gold")
     .select("id,shop_name,date,due,Amount,status,formula,profit");
@@ -273,7 +277,10 @@ async function deleteRecord(e) {
 
 //filter
 async function filter({ dn, sd, ed, stat, transactionArea }) {
+  const t_col = document.getElementById("transaction-column");
   transactionArea.innerHTML = "";
+  transactionArea.append(t_col);
+  transactionArea.append(loader1);
   console.log("filter");
   console.log(dn);
   console.log(stat);
@@ -295,6 +302,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   const { data: transactions, error } = await query;
   console.log(transactions);
   console.log(error);
+  if (transactions) document.getElementById("loader1")?.remove();
   transactions?.map((t) => {
     const row = getTransactionRow(t);
     transactionArea.append(row);
