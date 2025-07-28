@@ -12,11 +12,15 @@ let dokanDetails = [];
 
 const loader = document.createElement("div");
 loader.id = "loader";
-
 const spinner = document.createElement("div");
 spinner.className = "spinner";
-
 loader.appendChild(spinner);
+
+//Confirmer
+
+const confirmer = document.createElement("div");
+confirmer.id = "confirmer";
+confirmer.appe;
 
 //get-dokans (for show dokans page and other dropdown)
 
@@ -46,6 +50,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.style.flexWrap = "nowrap";
       dokanItem.style.padding = "0";
       dokanItem.style.gap = "0.1rem";
+      // dokanItem.style.justifyContent = "center";
       dokanItem.id = dokan.id;
 
       dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div>
@@ -63,7 +68,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem">view<span/></div>
       <div class="span-menu1" id="dokan-due-${
         dokan.id
-      }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem'>${
+      }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem;padding:0.1rem 0.5rem'>${
         dueTotal < 0 ? "to pay" : "to be received"
       }</p></div>`;
 
@@ -189,7 +194,8 @@ function getTransactionRow(t) {
   row.style.margin = 0;
   row.style.padding = 0;
   row.style.gap = "0.1rem";
-  row.style.backgroundColor = "black";
+  row.style.backgroundColor = `${t.status == "given" ? "green" : "red"}`;
+  // row.style.justifyContent = "center";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
     t.date
