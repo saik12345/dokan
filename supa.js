@@ -189,13 +189,10 @@ function getTransactionRow(t) {
   const row = document.createElement("div");
   row.id = t.id;
   row.style.display = "flex";
-  // row.style.alignItems = "center";
   row.style.margin = 0;
   row.style.padding = 0;
   row.style.gap = "0.1rem";
   row.style.backgroundColor = "white";
-  // row.style.width = "fit-content";
-  // row.style.justifyContent = "center";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
     t.date
@@ -205,15 +202,15 @@ function getTransactionRow(t) {
     year: "numeric",
   })}</div>
     <div class="span-menu2">${t.shop_name}</div>
-    <div class="span-menu2">${t.Amount}</div>
-    <div class="span-menu2">${t.formula == 0 ? "no formula" : t.formula}</div>
-    <div class="span-menu2">${
-      t.due < 0
-        ? t.due +
-          '<hr style="border:3px solid red;width:1rem;margin:1px auto"/>'
-        : t.due +
-          '<hr style="border:3px solid green;width:1rem;margin:1px auto"/>'
-    }</div>
+    <div class="span-menu2" style="color:${
+      t.status == "given" ? "green" : "red"
+    }"><b>${t.Amount}</b></div>
+    <div class="span-menu2"  style="color:${
+      t.status == "given" ? "green" : "red"
+    }"><b>${t.formula == 0 ? "" : t.formula}</b></div>
+    <div class="span-menu2"  style="color:${
+      t.status == "given" ? "green" : "red"
+    }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
     <div class="span-menu2"></div>
     <div class="span-menu2 del-btn"><span  class="del-btn" id="t-del-${t.id}"
