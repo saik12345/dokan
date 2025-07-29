@@ -333,7 +333,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
 if (
   window.location.href.includes("index") ||
   window.location.pathname == "/dokan/" ||
-  window.location.pathname == ""
+  window.location.pathname == "/"
 ) {
   const status = document.getElementById("status");
   const formula = document.getElementById("formula");
