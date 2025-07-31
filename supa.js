@@ -54,6 +54,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
     dokanDetails.forEach(async (dokan) => {
       const dokanItem = document.createElement("div");
       const dueTotal = await dokanDueTotal(dokan.name);
+      const totalProfit = await dokanTotalProfit(dokan.name);
 
       // div.className="span-menu";
       dokanItem.style.display = "flex";
@@ -69,6 +70,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       }">${dueTotal} gm<p style='background-color:yellow;border-radius:1.5rem;font-size:small;color:black;text-align:center;margin-top:0.5rem;padding:0.1rem 0.5rem'>${
         dueTotal < 0 ? "to pay" : "to be received"
       }</p></div>
+      <div class="span-menu1"><span style="color:green;font-weight:900">+${totalProfit} gm</span></div>
       <div  class="dokan-delete span-menu1" style="display:flex;align-items:center;justify-content:center">
       <span id="dokan-delete-${
         dokan.id
@@ -116,6 +118,19 @@ async function dokanDueTotal(name) {
   data?.forEach((el) => {
     // console.log(due);
     total = total + el.due;
+  });
+  return total.toFixed(2);
+}
+//Total profit
+async function dokanTotalProfit(name) {
+  let total = 0;
+  const { data, error } = await supabase
+    .from("gold")
+    .select("profit")
+    .eq("shop_name", name);
+  data?.forEach((el) => {
+    // console.log(due);
+    total = total + el.profit;
   });
   return total.toFixed(2);
 }

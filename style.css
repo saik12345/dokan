@@ -54,7 +54,8 @@ select {
   background-color: blueviolet;
 }
 #form-container {
-  /* width: 80%; */
+  width: 80%;
+  border-radius: 5px;
   padding: 0.5rem 0.2rem 0rem 0.2rem;
   margin: 0 auto;
 }
