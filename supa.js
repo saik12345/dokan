@@ -255,7 +255,7 @@ function getTransactionRow(t) {
       t.status == "given" ? "green" : "red"
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
-    <div class="span-menu2">
+    <div class="span-menu2" style="width:2rem">
     <img src="edit.png" class="edit-btn" id="edit-dokan-${t.id}"/>
     </div>
     <div class="span-menu2"><img src="delete.png" class="del-btn" id="del-dokan-${
@@ -277,12 +277,19 @@ async function getTransactions(transactionArea) {
   }
   console.log(transactions);
   let totalProfit = 0;
-  transactions?.map((t) => {
-    totalProfit = totalProfit + t.profit;
-    const row = getTransactionRow(t);
-    transactionArea?.append(row);
-  });
-  document.getElementById("total-profit").innerHTML = totalProfit;
+  const noData = document.createElement("div");
+  noData.innerHTML = `<h2>No data Found ‼‼</h2>`;
+  console.log(transactions);
+  if (transactions?.length == 0) {
+    transactionArea.append(noData);
+  } else {
+    transactions?.map((t) => {
+      totalProfit = totalProfit + t.profit;
+      const row = getTransactionRow(t);
+      transactionArea?.append(row);
+    });
+  }
+  document.getElementById("total-profit").innerHTML = totalProfit.toFixed(2);
 }
 
 //delete record
@@ -353,16 +360,24 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   }
   console.log(query);
   const { data: transactions, error } = await query;
-  console.log(transactions);
   console.log(error);
   if (transactions) document.getElementById("loader1")?.remove();
   let totalProfit = 0;
-  transactions?.map((t) => {
-    totalProfit = totalProfit + t.profit;
-    const row = getTransactionRow(t);
-    transactionArea.append(row);
-  });
-  document.getElementById("total-profit").innerHTML = `${totalProfit}`;
+  const noData = document.createElement("div");
+  noData.innerHTML = `<h2>No data Found ‼‼</h2>`;
+  console.log(transactions);
+  if (transactions?.length == 0) {
+    transactionArea.append(noData);
+  } else {
+    transactions?.map((t) => {
+      totalProfit = totalProfit + t.profit;
+      const row = getTransactionRow(t);
+      transactionArea.append(row);
+    });
+  }
+  document.getElementById("total-profit").innerHTML = `${totalProfit.toFixed(
+    2
+  )}`;
   // transactionArea.append();
 }
 
