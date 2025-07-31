@@ -80,6 +80,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.style.padding = "0";
       dokanItem.style.gap = "0.1rem";
       dokanItem.style.width = "100vw";
+      dokanItem.style.height = "4em";
       // dokanItem.style.justifyContent = "center";
       dokanItem.id = dokan.id;
 
@@ -91,15 +92,15 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       }</p></div>
       <div class="span-menu1"><span style="color:green;font-weight:900">+${totalProfit} gm</span></div>
       <div  class="dokan-delete span-menu1" style="display:flex;align-items:center;justify-content:center">
-      <span id="dokan-delete-${
+      <img src="delete.png" id="dokan-delete-${
         dokan.id
-      }" style="background-color:red;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem" class="dokan-delete">delete</span>
+      }" style="border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;height:2rem;width:2rem" class="dokan-delete"/>
       </div>
       <div  class="dokan-show span-menu1" style="display:flex;align-items:center;justify-content:center">
 
-      <span id="dokan-show-${
+      <img src="visual.png" id="dokan-show-${
         dokan.id
-      }" style="background-color:green;border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;">view<span/></div>
+      }" style="border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;height:2rem;width:2rem"/></div>
       `;
 
       dokanArea?.append(dokanItem);
