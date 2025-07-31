@@ -165,12 +165,12 @@ select {
   margin: 5px 5px;
 }
 
-#del-btn {
+.del-btn {
   cursor: pointer;
   width: 2rem;
   height: 2rem;
 }
-#edit-btn {
+.edit-btn {
   cursor: pointer;
   width: 2rem;
   height: 2rem;

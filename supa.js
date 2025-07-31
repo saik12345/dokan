@@ -256,9 +256,11 @@ function getTransactionRow(t) {
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
     <div class="span-menu2">
-    <img src="edit.png" id="edit-btn"/>
+    <img src="edit.png" class="edit-btn" id="edit-dokan-${t.id}"/>
     </div>
-    <div class="span-menu2"><img src="delete.png" id="del-btn"/></div>
+    <div class="span-menu2"><img src="delete.png" class="del-btn" id="del-dokan-${
+      t.id
+    }"/></div>
      `;
   return row;
 }
