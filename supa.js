@@ -172,8 +172,10 @@ async function addDokan(e, addDokanForm) {
   }
 
   addDokanForm?.reset();
-  due;
-  window.location.href = "/dokan/";
+  showAlert("✅New Dokan Added Succesfully", 1000);
+  setTimeout(() => {
+    window.location.href = "/dokan/";
+  }, 1000);
 }
 
 //calculate-due
@@ -233,6 +235,7 @@ function getTransactionRow(t) {
   row.style.padding = 0;
   row.style.gap = "0.1rem";
   row.style.backgroundColor = "white";
+  row.style.height = "3.5rem";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
     t.date
@@ -253,10 +256,9 @@ function getTransactionRow(t) {
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
     <div class="span-menu2">
-    <span class="edit-btn" id="t-edit-${t.id}">edit</span>
+    <img src="edit.png" id="edit-btn"/>
     </div>
-    <div class="span-menu2"><span class="del-btn" id="t-del-${t.id}"
-     >delete</span></div>
+    <div class="span-menu2"><img src="delete.png" id="del-btn"/></div>
      `;
   return row;
 }

@@ -12,7 +12,8 @@
     <div id="logo">
       <h1>Add dokan</h1>
     </div>
-    <div>
+    <div id="custom-alert" class="alert hidden"></div>
+    <div style="width: 80%; padding: 1.5rem 0rem; margin: 0 auto">
       <form id="dokan-add" action="#">
         <div class="container">
           <span>Enter Dokan Name : </span>
@@ -40,8 +41,8 @@
           <input id="adr" style="width: fit-content" type="text" />
         </div>
         <button
-          id="add-dokan-button"
           type="submit"
+          id="add-dokan-button"
           style="
             display: inline-block;
             padding: 10px 20px;
@@ -50,6 +51,7 @@
             text-decoration: none;
             border-radius: 5px;
             border: 2px solid black;
+            margin-top: 1rem;
           "
         >
           Submit

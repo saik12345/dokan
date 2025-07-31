@@ -102,10 +102,10 @@ select {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  text-align: center;
-  /* padding: 1.5rem; */
+  /* text-align: center; */
+  padding: 2rem;
   align-items: center;
-  padding: 0.5rem 0rem;
+  padding: 1rem 0rem;
 }
 #loader {
   position: fixed;
@@ -165,22 +165,15 @@ select {
   margin: 5px 5px;
 }
 
-.del-btn {
-  background-color: red;
-  color: white;
-  padding: 0.5rem 0.8rem;
-  font-size: small;
-  border-radius: 1.2rem;
+#del-btn {
   cursor: pointer;
+  width: 2rem;
+  height: 2rem;
 }
-.edit-btn {
-  background-color: rgba(237, 237, 60, 0.85);
-  color: black;
-  border: 2px solid black;
-  padding: 0.5rem 0.8rem;
-  font-size: small;
-  border-radius: 1.2rem;
+#edit-btn {
   cursor: pointer;
+  width: 2rem;
+  height: 2rem;
 }
 .alert {
   position: fixed;
