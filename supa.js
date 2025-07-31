@@ -206,6 +206,7 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
     .select();
   console.log(error);
   console.log(data);
+  alert("Submitted successfully");
   goldForm.reset();
   due.textContent = 0;
 }
@@ -257,11 +258,13 @@ async function getTransactions(transactionArea) {
     document.getElementById("loader")?.remove();
   }
   console.log(transactions);
-
+  let totalProfit = 0;
   transactions?.map((t) => {
+    totalProfit = totalProfit + t.profit;
     const row = getTransactionRow(t);
     transactionArea?.append(row);
   });
+  document.getElementById("total-profit").innerHTML = totalProfit;
 }
 
 //delete record
@@ -335,10 +338,13 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   console.log(transactions);
   console.log(error);
   if (transactions) document.getElementById("loader1")?.remove();
+  let totalProfit = 0;
   transactions?.map((t) => {
+    totalProfit = totalProfit + t.profit;
     const row = getTransactionRow(t);
     transactionArea.append(row);
   });
+  document.getElementById("total-profit").innerHTML =`${totalProfit}`;
   // transactionArea.append();
 }
 

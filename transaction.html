@@ -48,6 +48,15 @@
         border-radius: 10px;
         display: inline-block;
       }
+      .profit {
+        background-color: white;
+        /* background-color: blueviolet; */
+        margin: 5px 10px;
+        border: 3px solid green;
+        box-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
+        border-radius: 10px;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
@@ -92,6 +101,11 @@
           <option value="given">given</option>
           <option value="received">received</option>
         </select>
+      </div>
+      <div style="display: flex; justify-content: center">
+        <div class="profit">
+          Profit : <span id="total-profit" style="color: green">0</span>
+        </div>
       </div>
       <div
         id="transactionArea"
