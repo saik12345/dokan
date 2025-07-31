@@ -177,10 +177,15 @@ select {
 }
 .alert {
   position: fixed;
-  top: 80%;
-  left: 1rem;
-  width: 50%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #d1e7dd;
+  backdrop-filter: blur(5px);
   color: #0f5132;
   border: 1px solid green;
   border-radius: 5px;

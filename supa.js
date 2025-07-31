@@ -22,6 +22,9 @@ const spinner1 = document.createElement("div");
 spinner1.className = "spinner";
 loader1.appendChild(spinner1);
 
+const message = document.createElement("div");
+message.id = "loader";
+
 //Confirmer
 
 const confirmer = document.createElement("div");
@@ -33,7 +36,7 @@ confirmMessage.innerHTML = `<h3>Are you sure ?</h3>
 confirmer.append(confirmMessage);
 
 //show alert
-function showAlert(message, duration = 3000) {
+function showAlert(message, duration = 1000) {
   const alertBox = document.getElementById("custom-alert");
   alertBox.textContent = message;
   alertBox.classList.remove("hidden");
@@ -172,7 +175,7 @@ async function addDokan(e, addDokanForm) {
   }
 
   addDokanForm?.reset();
-  showAlert("✅New Dokan Added Succesfully", 1000);
+  showAlert("✅New Dokan Added Succesfully", 700);
   setTimeout(() => {
     window.location.href = "/dokan/";
   }, 1000);
@@ -223,7 +226,7 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
   console.log(data);
   // alert("Submitted successfully");
   goldForm.reset();
-  showAlert("✅successfully submitted data", 3000);
+  showAlert("✅successfully submitted data", 1000);
   due.textContent = 0;
 }
 //get-row
@@ -397,10 +400,7 @@ if (
   const amt = document.getElementById("amt");
   const goldForm = document.getElementById("gold-form");
   getAllDokans({ dno });
-  //++++++ EVENT LISTENER +++++++++
-  // document.getElementById('balance-show').addEventListener(()=>{
-  //   const data
-  // })
+  //++++++ EVENT LISTENER ++++++++
   dno?.addEventListener("change", () => {
     console.log(dno.value);
   });
