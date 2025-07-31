@@ -184,9 +184,9 @@ select {
 }
 .alert {
   position: fixed;
-  top: 3rem;
+  top: 80%;
   left: 1rem;
-  width: 80%;
+  width: 50%;
   background-color: #d1e7dd;
   color: #0f5132;
   border: 1px solid green;
