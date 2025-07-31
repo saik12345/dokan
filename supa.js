@@ -26,14 +26,16 @@ const message = document.createElement("div");
 message.id = "loader";
 
 //Confirmer
-
-const confirmer = document.createElement("div");
-confirmer.id = "loader";
-const confirmMessage = document.createElement("div");
-confirmMessage.className = "confirm";
-confirmMessage.innerHTML = `<h3>Are you sure ?</h3>
+function getConfirmer() {
+  const confirmer = document.createElement("div");
+  confirmer.id = "loader";
+  const confirmMessage = document.createElement("div");
+  confirmMessage.className = "confirm";
+  confirmMessage.innerHTML = `<h3>Are you sure ?</h3>
 <button class="cb" id="yes">yes</button><button class="cb" id="no">No</button>`;
-confirmer.append(confirmMessage);
+  confirmer.append(confirmMessage);
+  return confirmer;
+}
 
 //show alert
 function showAlert(message, duration = 1000) {
@@ -77,6 +79,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       dokanItem.style.flexWrap = "nowrap";
       dokanItem.style.padding = "0";
       dokanItem.style.gap = "0.1rem";
+      dokanItem.style.width = "100vw";
       // dokanItem.style.justifyContent = "center";
       dokanItem.id = dokan.id;
 
@@ -258,12 +261,10 @@ function getTransactionRow(t) {
       t.status == "given" ? "green" : "red"
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
-    <div class="span-menu2" style="width:2rem">
+    <div class="span-menu2" style="width:2rem;display:flex;flex-wrap:nowrap;justify-content:center">
     <img src="edit.png" class="edit-btn" id="edit-dokan-${t.id}"/>
+    <img src="delete.png" class="del-btn" id="del-dokan-${t.id}"/>
     </div>
-    <div class="span-menu2"><img src="delete.png" class="del-btn" id="del-dokan-${
-      t.id
-    }"/></div>
      `;
   return row;
 }
@@ -302,10 +303,9 @@ async function deleteRecord(e) {
     window.location.pathname == "/dokan/transaction.html" ||
     window.location.href.includes("transaction")
   ) {
-    let confStat = "";
-    document.body.appendChild(confirmer);
+    const confirmMessage = getConfirmer();
+    document.body.appendChild(confirmMessage);
     document.getElementById("yes").addEventListener("click", async () => {
-      confirmer.remove();
       console.log("del");
       const btn = e.target;
       const id = btn.id;
@@ -317,24 +317,33 @@ async function deleteRecord(e) {
         .eq("id", id.split("-")[2]);
       console.log(error);
       document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
+      confirmMessage.remove();
     });
     document.getElementById("no").addEventListener("click", () => {
-      confirmer.remove();
+      confirmMessage.remove();
     });
   } else if (
     window.location.pathname == "/dokan/dokans.html" ||
     window.location.href.includes("dokans")
   ) {
     console.log(e);
-    const el = e.target;
-    console.log(el);
-    const id = el.id;
-    console.log(el.id);
-    const { error } = await supabase
-      .from("dokan")
-      .delete()
-      .eq("id", id.split("-")[2]);
-    document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
+    const confirmMessage = getConfirmer();
+    document.body.appendChild(confirmMessage);
+    document.getElementById("yes").addEventListener("click", async () => {
+      const el = e.target;
+      console.log(el);
+      const id = el.id;
+      console.log(el.id);
+      const { error } = await supabase
+        .from("dokan")
+        .delete()
+        .eq("id", id.split("-")[2]);
+      document.querySelector(`div[id="${id.split("-")[2]}"]`).remove();
+      confirmMessage.remove();
+    });
+    document.getElementById("no").addEventListener("click", () => {
+      confirmMessage.remove();
+    });
   }
 }
 
