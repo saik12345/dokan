@@ -182,3 +182,28 @@ select {
   border-radius: 1.2rem;
   cursor: pointer;
 }
+.alert {
+  position: fixed;
+  top: 3rem;
+  left: 1rem;
+  width: 80%;
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.3);
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.alert.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.alert.show {
+  opacity: 1;
+}

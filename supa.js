@@ -32,6 +32,19 @@ confirmMessage.innerHTML = `<h3>Are you sure ?</h3>
 <button class="cb" id="yes">yes</button><button class="cb" id="no">No</button>`;
 confirmer.append(confirmMessage);
 
+//show alert
+function showAlert(message, duration = 3000) {
+  const alertBox = document.getElementById("custom-alert");
+  alertBox.textContent = message;
+  alertBox.classList.remove("hidden");
+  alertBox.classList.add("show");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+    alertBox.classList.add("hidden");
+  }, duration);
+}
+
 //get-dokans (for show dokans page and other dropdown)
 
 async function getAllDokans({ dokanArea = null, dno = null }) {
@@ -206,8 +219,9 @@ async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
     .select();
   console.log(error);
   console.log(data);
-  alert("Submitted successfully");
+  // alert("Submitted successfully");
   goldForm.reset();
+  showAlert("✅successfully submitted data", 3000);
   due.textContent = 0;
 }
 //get-row
@@ -344,7 +358,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
     const row = getTransactionRow(t);
     transactionArea.append(row);
   });
-  document.getElementById("total-profit").innerHTML =`${totalProfit}`;
+  document.getElementById("total-profit").innerHTML = `${totalProfit}`;
   // transactionArea.append();
 }
 
