@@ -408,7 +408,7 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   console.log(dn);
   console.log(stat);
   let query = supabase.from("gold").select("*");
-  const defaultQuery = `supabase.from('gold).select('*')`;
+
   if (dn != "None") {
     query = query.eq("shop_name", dn);
   }
@@ -421,7 +421,6 @@ async function filter({ dn, sd, ed, stat, transactionArea }) {
   if (stat != "None") {
     query = query.eq("status", stat);
   }
-  console.log(query);
   const { data: transactions, error } = await query;
   console.log(error);
   if (transactions) document.getElementById("loader1")?.remove();
