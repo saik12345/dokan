@@ -123,7 +123,7 @@
           </div>
           <div class="container">
             <div>
-              Amount : <input id="amt" type="number" /> gm
+              Amount : <input id="amt" type="number" step="any" /> gm
               <h5 id="a-e" hidden>please enter amount</h5>
             </div>
             <div style="margin-left: 1rem">
@@ -136,7 +136,7 @@
           </div>
 
           <div class="container">
-            <span>Formula</span>
+            <span style="font-size: medium; font-weight: lighter">Formula</span>
 
             <select id="formula">
               <option value="92.75" selected>92.75</option>
@@ -147,8 +147,14 @@
               <option value="94.25">94.25</option>
               <option value="95">95</option>
             </select>
-            <!-- <input id="manual" type="number" hidden value="0" /> -->
+
+            <span id="add-new-formula">+</span>
             <h5 id="f-e" hidden>Please select or enter a formula</h5>
+          </div>
+          <div class="container">
+            <span id="new-formula-span" hidden="true">
+              New Formula:<input type="number" step="any" id="new-formula" />
+            </span>
           </div>
           <div class="container">
             <div>

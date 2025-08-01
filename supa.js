@@ -58,8 +58,6 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
 
   console.log(dokans);
   if (window.location.href.includes("dokans")) {
-    // console.log("index");
-
     dokans?.map((dokan) => {
       dokanDetails.push({
         id: dokan.id,
@@ -74,14 +72,12 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
       const dueTotal = await dokanDueTotal(dokan.name);
       const totalProfit = await dokanTotalProfit(dokan.name);
 
-      // div.className="span-menu";
       dokanItem.style.display = "flex";
       dokanItem.style.flexWrap = "nowrap";
       dokanItem.style.padding = "0";
       dokanItem.style.gap = "0.1rem";
       dokanItem.style.width = "100vw";
       dokanItem.style.height = "4em";
-      // dokanItem.style.justifyContent = "center";
       dokanItem.id = dokan.id;
 
       dokanItem.innerHTML = `<div class="span-menu1">${dokan.name}</div>
@@ -100,7 +96,7 @@ async function getAllDokans({ dokanArea = null, dno = null }) {
 
       <img src="visual.png" id="dokan-show-${
         dokan.id
-      }" style="border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;height:2rem;width:2rem"/></div>
+      }" style="border-radius:1.8rem;text-align:center;border:2px solid black;cursor:pointer;padding:0.2rem 0.6rem;height:2rem;width:2rem" class="dokan-show "/></div>
       `;
 
       dokanArea?.append(dokanItem);
@@ -155,6 +151,14 @@ async function dokanTotalProfit(name) {
   return total.toFixed(2);
 }
 
+//view individual dokan
+async function viewDokan(e) {
+  console.log(e);
+  const el = e.target.id;
+  const id = el.split("-")[2];
+  window.location.href = `/dokan/dokanDetails.html?id=${id}`;
+}
+
 //add-dokans
 async function addDokan(e, addDokanForm) {
   e.preventDefault();
@@ -186,43 +190,89 @@ async function addDokan(e, addDokanForm) {
 }
 
 //calculate-due
-function calculateDue(status, due, amt, formula) {
+function calculateDue(status, due, amt, formula, hidden, newFormula) {
   let dueamt;
-  if (status.value == "given") {
-    dueamt = Number((amt.value * formula.value) / 99.5);
-    due.textContent = dueamt.toFixed(2);
+  if (status.value === "given") {
+    if (!hidden && newFormula.value > 92) {
+      dueamt = Number(amt.value * newFormula.value) / 99.5;
+      due.textContent = dueamt.toFixed(2);
+    } else if (!hidden && newFormula.value < 92) {
+      due.textContent = 0;
+    } else {
+      dueamt = Number((amt.value * formula.value) / 99.5);
+      due.textContent = dueamt.toFixed(2);
+    }
   } else {
-    dueamt = Number(amt.value);
-    due.textContent = dueamt.toFixed(2);
+    due.textContent = amt.value;
   }
 }
 
 //add gold-form data
 
-async function goldFormData(e, dno, amt, status, frml, due, goldForm) {
+async function goldFormData({
+  e,
+  dno,
+  amt,
+  status,
+  frml,
+  due,
+  newFormula,
+  hidden,
+  goldForm,
+}) {
   e.preventDefault();
   if (!dno.value || !amt.value) {
     alert("Please fill all fields!");
     return;
   }
+  console.log(hidden, "submit form");
+  if (!hidden) {
+    if (
+      newFormula.value == "" ||
+      newFormula.value == null ||
+      Number(newFormula.value) <= 92 ||
+      Number(newFormula.value) == 0 ||
+      isNaN(newFormula.value) == true
+    ) {
+      alert("Enter proper formula above 92");
+      return;
+    }
+  }
+
+  // console.log(formula.value);
+  let profit = 0;
+  if (status.value === "given") {
+    if (!hidden) {
+      profit = (
+        ((Number(newFormula.value) - 92) / 99.5) *
+        Number(amt.value)
+      ).toFixed(2);
+    } else {
+      profit = (((Number(frml.value) - 92) / 99.5) * Number(amt.value)).toFixed(
+        2
+      );
+    }
+  }
+
   const { data, error } = await supabase
     .from("gold")
     .insert([
       {
         shop_name: dno.value,
-        formula: status.value == "given" ? Number(formula.value) : 0,
+        // formula: status.value == "given" ? Number(formula.value) : 0,
+        formula:
+          status.value == "given"
+            ? hidden
+              ? frml.value
+              : newFormula.value
+            : "",
         due:
           status.value == "given"
             ? Number(due.textContent)
             : -1 * Number(due.textContent),
         Amount: amt.value,
         status: status.value,
-        profit:
-          status.value == "given"
-            ? (((Number(frml.value) - 92) / 99.5) * Number(amt.value)).toFixed(
-                2
-              )
-            : 0,
+        profit: status.value == "given" ? profit : 0,
       },
     ])
     .select();
@@ -409,27 +459,101 @@ if (
   const due = document.getElementById("due");
   const amt = document.getElementById("amt");
   const goldForm = document.getElementById("gold-form");
+  const newFormulaButton = document.getElementById("add-new-formula");
+  const newFormulaSpan = document.getElementById("new-formula-span");
+  const newFormula = document.getElementById("new-formula");
+  let hidden = true;
   getAllDokans({ dno });
   //++++++ EVENT LISTENER ++++++++
+  newFormulaButton.addEventListener("click", () => {
+    if (status.value === "given") {
+      if (newFormulaSpan.hasAttribute("hidden")) {
+        console.log("unhidden");
+        newFormulaSpan.removeAttribute("hidden");
+        newFormulaButton.innerHTML = "-";
+        hidden = false;
+        formula.setAttribute("disabled", true);
+      } else {
+        console.log("hidden");
+        newFormulaSpan.setAttribute("hidden", true);
+        newFormulaButton.innerHTML = "+";
+        hidden = true;
+        formula.removeAttribute("disabled");
+      }
+      calculateDue(
+        status,
+        due,
+        amt,
+        formula,
+        newFormulaSpan.hasAttribute("hidden"),
+        newFormula
+      );
+    }
+  });
+
   dno?.addEventListener("change", () => {
     console.log(dno.value);
   });
-  status?.addEventListener("change", function () {
-    if (this.value == "received") {
+
+  amt?.addEventListener("input", () =>
+    calculateDue(
+      status,
+      due,
+      amt,
+      formula,
+      newFormulaSpan.hasAttribute("hidden"),
+      newFormula
+    )
+  );
+  formula?.addEventListener("change", () =>
+    calculateDue(
+      status,
+      due,
+      amt,
+      formula,
+      newFormulaSpan.hasAttribute("hidden"),
+      newFormula
+    )
+  );
+  newFormula?.addEventListener("input", () =>
+    calculateDue(
+      status,
+      due,
+      amt,
+      formula,
+      newFormulaSpan.hasAttribute("hidden"),
+      newFormula
+    )
+  );
+  status?.addEventListener("change", () => {
+    if (status.value === "received") {
       formula.setAttribute("disabled", true);
+      newFormulaSpan.setAttribute("hidden", "");
+      newFormulaButton.innerHTML = "+";
     } else {
       formula.removeAttribute("disabled");
     }
+    calculateDue(
+      status,
+      due,
+      amt,
+      formula,
+      newFormulaSpan.hasAttribute("hidden"),
+      newFormula
+    );
   });
-  amt?.addEventListener("input", () => calculateDue(status, due, amt, formula));
-  formula?.addEventListener("change", () =>
-    calculateDue(status, due, amt, formula)
-  );
-  status?.addEventListener("change", () =>
-    calculateDue(status, due, amt, formula)
-  );
   goldForm?.addEventListener("submit", (e) =>
-    goldFormData(e, dno, amt, status, formula, due, goldForm)
+    goldFormData({
+      e,
+      dno,
+      amt,
+      status,
+      formula,
+      due,
+      newFormula,
+      hidden: newFormulaSpan.hasAttribute("hidden"),
+      goldForm,
+    })
   );
 }
 
@@ -443,6 +567,7 @@ if (window.location.href.includes("addDokan")) {
   const mob = document.getElementById("mob");
   const eml = document.getElementById("eml");
   const adr = document.getElementById("adr");
+
   const addDokanButton = document.getElementById("add-dokan-button");
   addDokanForm?.addEventListener("submit", (e) => addDokan(e, addDokanForm));
 }
@@ -515,6 +640,12 @@ if (window.location.href.includes("dokans")) {
     if (e.target.classList.contains("dokan-delete")) {
       console.log("del");
       deleteRecord(e);
+    }
+  });
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("dokan-show")) {
+      console.log("show");
+      viewDokan(e);
     }
   });
 }

@@ -102,10 +102,9 @@ select {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* text-align: center; */
-  padding: 2rem;
   align-items: center;
   padding: 1rem 0rem;
+  font-size: medium;
 }
 #loader {
   position: fixed;
@@ -204,4 +203,25 @@ select {
 
 .alert.show {
   opacity: 1;
+}
+#add-new-formula {
+  border-radius: 100%;
+  border: 1px solid black;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: blueviolet;
+  color: white;
+  cursor: pointer;
+}
+#new-formula {
+  margin-left: 1rem;
+}
+#new-formula-span {
+  font-weight: lighter;
+  margin-left: 1rem;
 }
