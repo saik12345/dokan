@@ -239,7 +239,8 @@ async function goldFormData({
     }
   }
 
-  // console.log(formula.value);
+  console.log(frml.value);
+  console.log(newFormula.value);
   let profit = 0;
   if (status.value === "given") {
     if (!hidden) {
@@ -259,13 +260,12 @@ async function goldFormData({
     .insert([
       {
         shop_name: dno.value,
-        // formula: status.value == "given" ? Number(formula.value) : 0,
         formula:
           status.value == "given"
             ? hidden
               ? frml.value
               : newFormula.value
-            : "",
+            : 0,
         due:
           status.value == "given"
             ? Number(due.textContent)
@@ -457,6 +457,7 @@ if (
   const dno = document.getElementById("d-n-o");
 
   const due = document.getElementById("due");
+  due.value = 0;
   const amt = document.getElementById("amt");
   const goldForm = document.getElementById("gold-form");
   const newFormulaButton = document.getElementById("add-new-formula");
@@ -548,7 +549,7 @@ if (
       dno,
       amt,
       status,
-      formula,
+      frml: formula,
       due,
       newFormula,
       hidden: newFormulaSpan.hasAttribute("hidden"),
