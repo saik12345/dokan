@@ -288,11 +288,13 @@ function getTransactionRow(t) {
   const row = document.createElement("div");
   row.id = t.id;
   row.style.display = "flex";
+  row.style.flexWrap = "nowrap";
   row.style.margin = 0;
   row.style.padding = 0;
   row.style.gap = "0.1rem";
   row.style.backgroundColor = "white";
-  row.style.height = "3.5rem";
+  // row.style.height = "3.5rem";
+  row.style.width = "100%";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
     t.date
@@ -312,7 +314,7 @@ function getTransactionRow(t) {
       t.status == "given" ? "green" : "red"
     }"><b>${t.due}</b></div>
     <div class="span-menu2">${t.profit}</div>
-    <div class="span-menu2" style="width:2rem;display:flex;flex-wrap:nowrap;justify-content:center">
+    <div class="span-menu2" style="display:flex;flex-wrap:nowrap;justify-content:center">
     <img src="edit.png" class="edit-btn" id="edit-dokan-${t.id}"/>
     <img src="delete.png" class="del-btn" id="del-dokan-${t.id}"/>
     </div>
