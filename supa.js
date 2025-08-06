@@ -295,6 +295,7 @@ function getTransactionRow(t) {
   row.style.backgroundColor = "white";
   // row.style.height = "3.5rem";
   row.style.width = "100%";
+  row.style.height = "4rem";
   row.id = t.id;
   row.innerHTML = `<div class="span-menu2">${new Date(
     t.date
